@@ -93,14 +93,20 @@
 %% ========================================================
 %% chap
 
+%% renew chaptermark
+% \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+
 %% commands that have to be executed for each chapter
 %% e.g. \setcounter{stcounter}{0}
-\newcommand{\executeforeachchap}[1]{\markboth{#1}{}\thispagestyle{empty}\clearpage}
+\newcommand{\executeforeachchap}[1]{\thispagestyle{empty}\clearpage}
 
 \newcommand{\chap}[1]{\savegeometry{defaultgeometry}\newgeometry{margin=2cm}\chapter{#1}\localtoc\executeforeachchap{#1}\loadgeometry{defaultgeometry}}
 
 %% ========================================================
 %% section header
+
+%% renew sectionmark
+% \renewcommand{\sectionmark}[1]{\markright{#1}}
 
 %% section header style macros
 \newcommand{\sectionstyle}{\color{darkgray}\bfseries\sffamily\Large}

@@ -143,12 +143,20 @@
 \pagestyle{fancy}
 \fancyhf{}
 
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{#1}}
+
 %% ========================================================
-%% header offset 
+%% remove header line
+
+\renewcommand{\headrulewidth}{0pt}
+
+%% ========================================================
+%% offsets 
 
 \fancyheadoffset[L]{\marginparwidth+\marginparsep}
 
 %% ========================================================
 %% headers 
 
-\cfoot{\hspace{-3.3cm}\thepage}
+\rhead{\fontfamily{phv}\selectfont\nouppercase{\leftmark}\ \ |\ \ \nouppercase{\rightmark}\ \ \ \ \ \ \ \ \ \ \thepage}
