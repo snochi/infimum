@@ -1,0 +1,138 @@
+
+%% ========================================================
+%% package imports
+
+\RequirePackage{afterpage}
+\RequirePackage{emptypage}
+\RequirePackage{etoc}
+\RequirePackage{graphicx}
+\RequirePackage{hyperref}
+\RequirePackage{titlesec}  % modification of title of chapter-like commands
+\RequirePackage{tocloft}
+\RequirePackage{xcolor}
+
+\RequirePackage{datetime}
+
+%% =========================================================
+%% graphics path
+
+\graphicspath{{/home/nanachi/LaTeX/}}
+
+%% =========================================================
+%% icon symbols for various fields of mathematics
+
+\newcommand{\analysisicon}{\includegraphics[width=100pt,height=100pt]{tortoise}}
+\newcommand{\algebraicon}{\includegraphics[width=100pt,height=100pt]{cube}}
+\newcommand{\probabilityicon}{\includegraphics[width=100pt,height=100pt]{suits}}
+
+%% =========================================================
+%% horizontal line with a text
+
+%% ruleline style macros
+\newcommand{\rulelinecolor}{darkgray}
+\newcommand{\rulelinefontstyle}[1]{\textbf{\emph{#1}}}
+\newcommand{\ruleleftoffset}{0pt}
+
+\newcommand*\ruleline[1]{%
+    \begingroup
+    \vspace{-5pt}
+    \color{\rulelinecolor}
+    \noindent\hrulefill
+
+    \vspace{-10pt}
+    \reversemarginpar
+    \marginnote{\raggedright \textbf{\textit{#1}}}
+    \vspace{10pt}
+    \endgroup
+}
+
+%% =========================================================
+%% blecture and electure commands
+
+%% counters
+\newcounter{leccounter}
+\setcounter{leccounter}{0}
+
+\newcommand{\blecture}{\stepcounter{leccounter}\ruleline{Lecture \theleccounter\ Starts Here\\\small\usdate\today}}
+\newcommand{\electure}{\ruleline{Lecture \theleccounter\ Ends Here}}
+
+%% =========================================================
+%% localtoc below chapter
+
+%% localtoc style macros
+\newcommand{\localtocrule}{{\color{darkgray}\rule{10cm}{1pt}}}
+
+\newcommand{\localtoc}{
+    \localtocrule 
+    \etocsettocstyle{}{}
+    \setlength{\cftsecindent}{0pt}\renewcommand{\cftdot}{}\cftpagenumbersoff{section}
+    \renewcommand{\cftsecfont}{\normalfont\sffamily}
+    \renewcommand{\cftsecpagefont}{\normalfont\sffamily}
+    \localtableofcontents
+    \vspace{-5pt}\noindent\localtocrule
+}
+
+%% ========================================================
+%% toc
+
+\newcommand{\toc}{
+    \savegeometry{defaultgeometry}
+    \newgeometry{margin=2cm}
+    \tableofcontents
+    \loadgeometry{defaultgeometry}
+}
+
+%% =========================================================
+%% chapter header
+
+%% chapter header style macros
+\newcommand{\chapterstyle}{\color{darkgray}\bfseries\sffamily\Huge}
+
+\titleformat{\chapter}[display]{\chapterstyle}{\thechapter.}{0pt}{}
+
+%% ========================================================
+%% chap
+
+%% commands that have to be executed for each chapter
+%% e.g. \setcounter{stcounter}{0}
+\newcommand{\executeforeachchap}[1]{\markboth{#1}{}\thispagestyle{empty}\clearpage}
+
+\newcommand{\chap}[1]{\savegeometry{defaultgeometry}\newgeometry{margin=2cm}\chapter{#1}\localtoc\executeforeachchap{#1}\loadgeometry{defaultgeometry}}
+
+%% ========================================================
+%% section header
+
+%% section header style macros
+\newcommand{\sectionstyle}{\color{darkgray}\bfseries\sffamily\Large}
+
+\titleformat{\section}{\sectionstyle}{}{0pt}{}
+
+%% =========================================================
+%% blank page after a titlepage
+
+\makeatletter
+\def\cleardoublepage{
+    \clearpage
+        \ifodd\c@page
+        \else
+            \vspace*{\fill}
+            \hfill
+            \begin{center}
+                \emph{\large This page intentionally left blank.}
+            \end{center}
+            \vspace{\fill}
+            \thispagestyle{empty}
+        \newpage
+    \fi
+}
+\makeatother
+
+%% =========================================================
+%% insert \reversemarginpar\marginnote{\raggedright ~} 
+
+\newcommand{\note}[1]{\reversemarginpar\marginnote{\raggedright \textit{#1}}}
+
+%% =========================================================
+%% color
+
+\definecolor{darkgray}{gray}{0.3}

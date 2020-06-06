@@ -1,0 +1,60 @@
+%% =========================================================
+%% package imports
+
+\RequirePackage{xcolor}
+\RequirePackage{mdframed}
+
+%% =========================================================
+%% counter
+
+\newcounter{excounter}
+\setcounter{excounter}{0}
+
+%% =========================================================
+%% example-like environment
+
+%% example style macros
+\newcommand{\exheadercolor}{black}
+\newcommand{\exheaderfont}{\bfseries}
+\newcommand{\expreskip}{5pt}
+\newcommand{\expostskip}{5pt}
+
+\newenvironment{plainexample}[1]{
+    \stepcounter{excounter}
+    \vspace{\expreskip}
+    \noindent{\color{\exheadercolor}\exheaderfont #1 \thechapter.\theexcounter.}
+}{\vspace{\expostskip}}
+
+%% ========================================================
+%% definition-like environment
+
+%% definition stype macros
+\newcommand{\defnheaderfont}{\bfseries}
+\newcommand{\defnsubheaderfont}{\normalfont}
+\newcommand{\defnleftrulecolor}{darkgray}
+
+\newenvironment{plaindefinition}[3]{
+    \begin{mdframed}[
+        topline=false, rightline=false, bottomline=false,
+        linecolor=\defnleftrulecolor, linewidth=4pt,
+        innerrightmargin=0pt, innertopmargin=0pt, innerbottommargin=0pt
+    ] 
+    {\defnheaderfont\color{\defnleftrulecolor} #1. #2 }{\color{\defnleftrulecolor}\defnsubheaderfont #3}\\
+}{\end{mdframed}}
+
+%% ========================================================
+%% some default wrappers
+
+\newenvironment{example}{\begin{plainexample}{Example}}{\end{plainexample}}
+
+\newenvironment{definition}[2]{\begin{plaindefinition}{Def'n}{#1}{#2}}{\end{plaindefinition}}
+
+%% ========================================================
+%% continued message
+
+\newcommand{\continued}[1]{\note{#1 \thechapter.\theexcounter\ is continued here.}}
+
+%% ========================================================
+%% colors
+
+\definecolor{darkgray}{gray}{0.3}

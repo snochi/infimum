@@ -1,0 +1,154 @@
+%% ========================================================
+%% a package for math and physics notes 
+%% version 1.0.0
+%% last date of revision: April 29, 2020
+
+%% by SoL
+
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+\ProvidesPackage{solpack}[2020/04/29 Sol's Package for Math and Physics]
+
+%% ========================================================
+%% package imports
+
+\RequirePackage{amsmath}     % equation
+\RequirePackage{appendix}    % \begin{appendices}
+\RequirePackage{enumitem}    % enumerate style
+\RequirePackage{fancyhdr}    % \pagestyle{fancy}
+\RequirePackage{fontspec}    % custom font
+\RequirePackage{mathptmx}    % times font
+\RequirePackage{solex}       % example and definition-like environments
+\RequirePackage{solity}      % utility (e.g. \ruleline)
+\RequirePackage{solmathsym}  % symbols for math
+\RequirePackage{solphyssym}  % units for physics
+\RequirePackage{solthm}      % statement-like environments
+
+\RequirePackage[T1]{fontenc} % custom font
+
+%% ========================================================
+%% loaded fonts
+%% this font has to be installed in the system
+
+\newfontfamily{\serifastd}{Serifa Std}
+
+%% ========================================================
+%% style macros of sol- packages
+
+%% solex
+\renewcommand{\defnheaderfont}{\fontfamily{phv}\selectfont\bfseries\small}
+\renewcommand{\defnsubheaderfont}{\fontfamily{phv}\selectfont\small}
+\renewcommand{\defnleftrulecolor}{navy}
+\renewcommand{\exheaderfont}{\fontfamily{phv}\selectfont\bfseries\small}
+\renewcommand{\exheadercolor}{ddarkgray}
+
+%% solity
+\renewcommand{\chapterstyle}{\color{navy}\serifastd\selectfont\bfseries\Huge}
+\renewcommand{\sectionstyle}{\color{navy}\serifastd\selectfont\bfseries\Large}
+\renewcommand{\executeforeachchap}[1]{\markboth{#1}{}\thispagestyle{empty}\setcounter{stcounter}{0}\setcounter{excounter}{0}\clearpage}
+
+%% solthm
+\renewcommand{\stheaderfont}{\fontfamily{phv}\selectfont\bfseries\small}
+
+%% ========================================================
+%% example-like environments
+
+\newenvironment{exercise}{\begin{plainexample}{Exercise}}{\end{plainexample}}
+\newenvironment{question}{\begin{plainexample}{Question}}{\end{plainexample}}
+\newenvironment{remark}  {\begin{plainexample}{Remark}}  {\end{plainexample}}
+
+%% ========================================================
+%% definition-like environments
+
+\newenvironment{recall}[2]{\begin{plaindefinition}{Recall}{#1}{#2}}{\end{plaindefinition}}
+
+%% ========================================================
+%% statement-like environments
+
+\newenvironment{lemma}[1]{\begin{plainstatement}{Lemma}{#1}}{\end{plainstatement}}
+
+%% ========================================================
+%% sets summation and Cartesian product symbols to ones used in Computer Modern typeface
+
+\DeclareFontFamily{U} {cmex}{}
+
+\DeclareFontShape{U}{cmex}{m}{n}{
+  <-8> cmex7
+  <8-9> cmex8
+  <9-10> cmex9
+  <10-> cmex10}{}
+
+\DeclareSymbolFont{Xcmex} {U} {cmex}{m}{n}
+
+\DeclareMathSymbol{\Xdsum}{\mathop}{Xcmex}{88}
+\DeclareMathSymbol{\Xtsum}{\mathop}{Xcmex}{80}
+\let\sum\relax
+\DeclareMathOperator{\sum}{\mathchoice{\Xdsum}{\Xtsum}{\Xtsum}{\Xtsum}}
+\DeclareMathSymbol{\Xdprod}{\mathop}{Xcmex}{89}
+\DeclareMathSymbol{\Xtprod}{\mathop}{Xcmex}{81}
+\let\prod\relax
+\DeclareMathOperator{\prod}{\mathchoice{\Xdprod}{\Xtprod}{\Xtprod}{\Xtprod}}
+
+%% ========================================================
+%% resets \mathcal fonts
+
+\DeclareMathAlphabet{\mathcal}{OMS}{cmsy}{m}{n}
+
+%% ========================================================
+%% proof header font 
+
+\renewcommand{\proofheaderfont}{\small\textit}
+
+%% ========================================================
+%% enumerate styles
+
+\renewcommand{\labelenumi}{(\alph{enumi})}     % (a), (b), ... for the first layer
+\renewcommand{\theenumi}{\labelenumi}
+\renewcommand{\labelenumii}{(\roman{enumii})}  % (i), (ii), ... for the second layer
+\renewcommand{\theenumii}{\labelenumii}
+
+%% ========================================================
+%% \emph style
+
+\DeclareTextFontCommand{\emph}{\color{ddarkgray}\bfseries\em}
+
+%% ========================================================
+%% statement style
+
+\renewcommand{\stbackgroundcolor}{skyblue}
+\renewcommand{\stheaderfontcolor}{navy}
+
+%% ========================================================
+%% colors
+
+\definecolor{ddarkgray}{gray}{0.1}
+
+\definecolor{navy}{HTML}{154551}
+
+\definecolor{skyblue}{HTML}{D2F2FB}
+
+%% ========================================================
+%% document icon
+%% renew this whenever needed
+
+\newcommand{\documenticon}{\analysisicon}
+
+%% ========================================================
+%% qed symbol
+
+\renewcommand{\qedsym}{\spadesuit}
+
+%% ========================================================
+%% page style
+
+\pagestyle{fancy}
+\fancyhf{}
+
+%% ========================================================
+%% header offset 
+
+\fancyheadoffset[L]{\marginparwidth+\marginparsep}
+
+%% ========================================================
+%% headers 
+
+\cfoot{\hspace{-3.3cm}\thepage}
