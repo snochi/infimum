@@ -1,1 +1,0 @@
-solpack is a LaTeX package which is best suited for taking math notes. The overall style of this package is inspired by Contemporary Abstract Algebra by Gallian, Joseph. To use this package, one has to download every files, and save them at ~/texmf/tex/latex/commonstuff/. 
