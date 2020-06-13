@@ -16,6 +16,7 @@
 \RequirePackage{enumitem}    % enumerate style
 \RequirePackage{fancyhdr}    % \pagestyle{fancy}
 \RequirePackage{fontspec}    % custom font
+\RequirePackage{mathdots}    % \ddots for reverse direction (\iddots)
 \RequirePackage{mathptmx}    % times font
 \RequirePackage{solex}       % example and definition-like environments
 \RequirePackage{solity}      % utility (e.g. \ruleline)
@@ -115,7 +116,7 @@
 %% statement style
 
 \renewcommand{\stbackgroundcolor}{skyblue}
-\renewcommand{\stheaderfontcolor}{navy}
+\renewcommand{\stheaderfontcolor}{black}
 
 %% ========================================================
 %% colors
@@ -159,4 +160,4 @@
 %% ========================================================
 %% headers 
 
-\rhead{\fontfamily{phv}\selectfont\nouppercase{\leftmark}\ \ |\ \ \nouppercase{\rightmark}\ \ \ \ \ \ \ \ \ \ \thepage}
+\rhead{\fontfamily{phv}\selectfont\nouppercase{\textbf{\leftmark}}\ \ |\ \ \nouppercase{\rightmark}\ \ \ \ \ \ \ \ \ \ \thepage}

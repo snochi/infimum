@@ -3,7 +3,7 @@
 
 
 %% ========================================================
-%% frequently used characters (e.g. \N for the set of natural numbers)
+%% algebraic structures
 
 \DeclareMathOperator{\N}{\mathbb{N}}
 \DeclareMathOperator{\Z}{\mathbb{Z}}
@@ -11,6 +11,7 @@
 \DeclareMathOperator{\R}{\mathbb{R}}
 \DeclareMathOperator{\CC}{\mathbb{C}} % to avoid collision with hyperref
 \DeclareMathOperator{\F}{\mathbb{F}}
+\DeclareMathOperator{\K}{\mathbb{K}}
 \DeclareMathOperator{\lin}{\mathcal{L}}
 \DeclareMathOperator{\alg}{\mathcal{A}}
 
@@ -23,12 +24,6 @@
 \DeclareMathOperator{\superseteq}{\supseteq}
 \DeclareMathOperator{\union}{\bigcup}
 \DeclareMathOperator{\insec}{\bigcap}
-
-%% ========================================================
-%% analysis
-
-\DeclareMathOperator{\lub}{LUB}
-\DeclareMathOperator{\glb}{GLB}
 
 %% ========================================================
 %% ring theory
@@ -56,16 +51,28 @@
 \DeclareMathOperator{\adj}{adj}
 \DeclareMathOperator{\tr}{tr}
 
-%% ========================================================
-%% inverse trigonometric functions
+%% norm
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
 
+%% ========================================================
+%% general
+
+\DeclareMathOperator{\re}{Re}
+\DeclareMathOperator{\imaginary}{Im} % to avoid collision with $\im$, which is defined as the range of a linear operator
+
+%% ========================================================
+%% analysis
+
+%% lub, glb
+\DeclareMathOperator{\lub}{LUB}
+\DeclareMathOperator{\glb}{GLB}
+
+%% inverse trigonometric functions
 \DeclareMathOperator{\arccsc}{arccsc}
 \DeclareMathOperator{\arcsec}{arcsec}
 \DeclareMathOperator{\arccot}{arccot}
 
-%% ========================================================
 %% differentials
-
 \DeclareMathOperator{\dif}{\,d}
 \DeclareMathOperator{\dr}{\,d\textit{r}}
 \DeclareMathOperator{\dt}{\,d\textit{t}}
@@ -85,9 +92,7 @@
 \DeclareMathOperator{\py}{\,\partial\textit{y}}
 \DeclareMathOperator{\pz}{\,\partial\textit{z}}
 
-%% ========================================================
 %% gradient
-
 \DeclareMathOperator{\del}{\nabla}
 
 %% ========================================================
