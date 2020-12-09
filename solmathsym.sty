@@ -16,6 +16,11 @@
 \DeclareMathOperator{\alg}{\mathcal{A}}
 
 %% ========================================================
+%% logical symbols
+
+\DeclareMathOperator{\onlyif}{\Longleftarrow}
+
+%% ========================================================
 %% set theory
 
 \DeclareMathOperator{\iso}{\cong}      % isomorphism and congruence shares the same symbol
@@ -24,6 +29,13 @@
 \DeclareMathOperator{\superseteq}{\supseteq}
 \DeclareMathOperator{\union}{\bigcup}
 \DeclareMathOperator{\insec}{\bigcap}
+\DeclareMathOperator{\power}{\mathcal{P}}
+
+%% functions
+\DeclareMathOperator{\domain}{domain}
+\DeclareMathOperator{\nul}{null}
+\let\graph\relax
+\DeclareMathOperator{\graph}{graph}
 
 %% ========================================================
 %% ring theory
@@ -40,10 +52,9 @@
 \DeclareMathOperator{\rank}{rank}
 
 %% range (image) of a linear transformation
-\DeclareMathOperator{\im}{image}
+\DeclareMathOperator{\image}{image}
 
-%% operators for fundamental subspaces of a matrix
-\DeclareMathOperator{\nul}{Null}
+%% column and row of a matrix
 \DeclareMathOperator{\col}{Col}
 \DeclareMathOperator{\row}{Row}
 
@@ -55,10 +66,10 @@
 \newcommand{\norm}[1]{\left\lVert#1\right\rVert}
 
 %% ========================================================
-%% general
+%% complex number
 
 \DeclareMathOperator{\re}{Re}
-\DeclareMathOperator{\imaginary}{Im} % to avoid collision with $\im$, which is defined as the range of a linear operator
+\DeclareMathOperator{\im}{Im} 
 
 %% ========================================================
 %% analysis
@@ -74,26 +85,82 @@
 
 %% differentials
 \DeclareMathOperator{\dif}{\,d}
-\DeclareMathOperator{\dr}{\,d\textit{r}}
-\DeclareMathOperator{\dt}{\,d\textit{t}}
-\DeclareMathOperator{\du}{\,d\textit{u}}
-\DeclareMathOperator{\dv}{\,d\textit{v}}
-\DeclareMathOperator{\dx}{\,d\textit{x}}
-\DeclareMathOperator{\dy}{\,d\textit{y}}
-\DeclareMathOperator{\dz}{\,d\textit{z}}
+\DeclareMathOperator{\da}{\,d\text{a}}
+\DeclareMathOperator{\db}{\,d\text{b}}
+\DeclareMathOperator{\dc}{\,d\text{c}}
+\DeclareMathOperator{\dd}{\,d\text{d}}
+\DeclareMathOperator{\de}{\,d\text{e}}
+\DeclareMathOperator{\df}{\,d\text{f}}
+\DeclareMathOperator{\dg}{\,d\text{g}}
+\DeclareMathOperator{\ddh}{\,d\text{h}}
+\DeclareMathOperator{\di}{\,d\text{i}}
+\DeclareMathOperator{\ddj}{\,d\text{j}}
+\DeclareMathOperator{\dk}{\,d\text{k}}
+\DeclareMathOperator{\dl}{\,d\text{l}}
+\DeclareMathOperator{\dm}{\,d\text{m}}
+\DeclareMathOperator{\dn}{\,d\text{n}}
+\DeclareMathOperator{\ddo}{\,d\text{o}}
+\DeclareMathOperator{\ddp}{\,d\text{p}}
+\DeclareMathOperator{\dq}{\,d\text{q}}
+\DeclareMathOperator{\dr}{\,d\text{r}}
+\DeclareMathOperator{\ds}{\,d\text{s}}
+\DeclareMathOperator{\dt}{\,d\text{t}}
+\DeclareMathOperator{\du}{\,d\text{u}}
+\DeclareMathOperator{\dv}{\,d\text{v}}
+\DeclareMathOperator{\dw}{\,d\text{w}}
+\DeclareMathOperator{\dx}{\,d\text{x}}
+\DeclareMathOperator{\dy}{\,d\text{y}}
+\DeclareMathOperator{\dz}{\,d\text{z}}
+\DeclareMathOperator{\dtau}{\,d\tau}
+\DeclareMathOperator{\dphi}{\,d\varphi}
+\DeclareMathOperator{\dpsi}{\,d\psi}
 
 %% partial differentials
 \DeclareMathOperator{\pd}{\,\partial}
-\DeclareMathOperator{\pr}{\,\partial\textit{r}}
-\DeclareMathOperator{\pt}{\,\partial\textit{t}}
-\DeclareMathOperator{\pu}{\,\partial\textit{u}}
-\DeclareMathOperator{\pv}{\,\partial\textit{v}}
-\DeclareMathOperator{\px}{\,\partial\textit{x}}
-\DeclareMathOperator{\py}{\,\partial\textit{y}}
-\DeclareMathOperator{\pz}{\,\partial\textit{z}}
+\DeclareMathOperator{\pr}{\,\partial\text{r}}
+\DeclareMathOperator{\ps}{\,\partial\text{s}}
+\DeclareMathOperator{\pt}{\,\partial\text{t}}
+\DeclareMathOperator{\pu}{\,\partial\text{u}}
+\DeclareMathOperator{\pv}{\,\partial\text{v}}
+\DeclareMathOperator{\pw}{\,\partial\text{w}}
+\DeclareMathOperator{\px}{\,\partial\text{x}}
+\DeclareMathOperator{\py}{\,\partial\text{y}}
+\DeclareMathOperator{\pz}{\,\partial\text{z}}
 
 %% gradient
 \DeclareMathOperator{\del}{\nabla}
+\DeclareMathOperator{\grad}{\nabla}
+
+%% diameter of a set
+\DeclareMathOperator{\diam}{diam}
+
+%% volume of a rectangle
+\DeclareMathOperator{\vol}{vol}
+
+%% convex line
+\DeclareMathOperator{\co}{Co}
+
+%% oscillation
+\DeclareMathOperator{\osc}{osc}
+
+%% set of integrable functions
+\DeclareMathOperator{\Int}{Int}
+
+%% interior, closure, boundary
+\DeclareMathOperator{\intr}{int}
+\DeclareMathOperator{\cl}{cl}
+\DeclareMathOperator{\bd}{bd}
+
+%% ========================================================
+%% probability and statistics
+
+\DeclareMathOperator{\PP}{\mathbb{P}} % probability measure
+
+\DeclareMathOperator{\EE}{\mathbb{E}} % expectation
+\DeclareMathOperator{\var}{var}
+\DeclareMathOperator{\sd}{sd}
+\DeclareMathOperator{\cov}{cov}
+\DeclareMathOperator{\corr}{cor}
 
 %% ========================================================
 %% greek latters
@@ -102,5 +169,39 @@
 \DeclareMathOperator{\varth}{\vartheta}
 \DeclareMathOperator{\varka}{\varkappa}
 \DeclareMathOperator{\varsi}{\varsigma}
+
+%% ========================================================
+%% misc
+
+%% mathcal latters
+\DeclareMathOperator{\mA}{\mathcal{A}}
+\DeclareMathOperator{\mB}{\mathcal{B}}
+\DeclareMathOperator{\mC}{\mathcal{C}}
+\DeclareMathOperator{\mD}{\mathcal{D}}
+\DeclareMathOperator{\mE}{\mathcal{E}}
+\DeclareMathOperator{\mF}{\mathcal{F}}
+\DeclareMathOperator{\mG}{\mathcal{G}}
+\DeclareMathOperator{\mH}{\mathcal{H}}
+\DeclareMathOperator{\mI}{\mathcal{I}}
+\DeclareMathOperator{\mJ}{\mathcal{J}}
+\DeclareMathOperator{\mK}{\mathcal{K}}
+\DeclareMathOperator{\mL}{\mathcal{L}}
+\DeclareMathOperator{\mM}{\mathcal{M}}
+\DeclareMathOperator{\mN}{\mathcal{N}}
+\DeclareMathOperator{\mO}{\mathcal{O}}
+\DeclareMathOperator{\mP}{\mathcal{P}}
+\DeclareMathOperator{\mQ}{\mathcal{Q}}
+\DeclareMathOperator{\mR}{\mathcal{R}}
+\DeclareMathOperator{\mS}{\mathcal{S}}
+\DeclareMathOperator{\mT}{\mathcal{T}}
+\DeclareMathOperator{\mU}{\mathcal{U}}
+\DeclareMathOperator{\mV}{\mathcal{V}}
+\DeclareMathOperator{\mW}{\mathcal{W}}
+\DeclareMathOperator{\mX}{\mathcal{X}}
+\DeclareMathOperator{\mY}{\mathcal{Y}}
+\DeclareMathOperator{\mZ}{\mathcal{Z}}
+
+\let\mod\relax
+\DeclareMathOperator{\mod}{\,mod\,}
 
 %% ========================================================

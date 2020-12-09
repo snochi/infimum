@@ -1,0 +1,464 @@
+%% =========================================================
+%% package definition
+
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{arev}           % filled diamond and heart
+\RequirePackage{calc}
+\RequirePackage[strict]{changepage} % for detecting odd/even page
+\RequirePackage{enumitem}
+\RequirePackage{fancyhdr}
+\RequirePackage{fontspec}
+\RequirePackage[top=2cm, bottom=2cm, left=4.5cm, right=1cm, marginparwidth=3.3cm, marginparsep=0.2cm]{geometry}
+\RequirePackage{graphicx}
+\RequirePackage{hyperref}
+\RequirePackage{marginnote}
+\RequirePackage{mathptmx}
+\RequirePackage{mathtools}
+\RequirePackage{mdframed}
+\RequirePackage{solmathsym}
+\RequirePackage{soul}               % for highlighting a text
+\RequirePackage{solphyssym}
+\RequirePackage{stmaryrd}           % \llbracket, \rrbracket
+\RequirePackage{titlesec}
+\RequirePackage{tocloft}
+\RequirePackage{xcolor}
+
+\RequirePackage[T1]{fontenc}        % this must come after fontspec
+\RequirePackage{etoc}               % this must come after tocloft
+
+\RequirePackage{listings}
+
+%% =========================================================
+%% enumitem
+
+%% itemize
+\renewcommand{\labelitemi}{$\circ$}
+\renewcommand{\labelitemii}{$\cdot$}
+
+%% enumerate
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\renewcommand{\theenumi}{\labelenumi}
+\renewcommand{\labelenumii}{(\roman{enumii})}
+\renewcommand{\theenumii}{\labelenumii}
+\renewcommand{\labelenumiii}{(\arabic{enumiii})}
+\renewcommand{\theenumiii}{\labelenumii}
+
+%% =========================================================
+%% fancyhdr
+
+%% setpagestyle and empty headers and footers
+\pagestyle{fancy}
+\fancyhf{}
+
+%% remove headrule
+\renewcommand{\headrulewidth}{0pt}
+
+%% offsets
+\fancyheadoffset[L]{\marginparwidth+\marginparsep}
+
+%% chaptermark, sectionmark
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{#1}}
+
+%% headers
+\lhead
+{%
+\fontfamily{phv}\selectfont
+\checkoddpage\ifoddpage%
+    \thepage\ \ \ \ \ \ \ \ \ \ \nouppercase{\textbf{\leftmark}}\ \ |\ \ \nouppercase{\rightmark}
+\else%
+    \doctitle
+\fi%
+}
+
+\rhead
+{%
+\fontfamily{phv}\selectfont
+\checkoddpage\ifoddpage%
+    \doctitle
+\else%
+    \nouppercase{\textbf{\leftmark}}\ \ |\ \ \nouppercase{\rightmark}\ \ \ \ \ \ \ \ \ \ \thepage
+\fi%
+}
+
+%% =========================================================
+%% fontenc and fontspec
+
+\newfontfamily{\serifastd}{Serifa Std}
+
+%% =========================================================
+%% graphicx
+
+\graphicspath{{/home/nanachi/LaTeX/}}
+
+%% =========================================================
+%% marginnote
+
+\newcommand{\parpreskip}{10pt}
+\newcommand{\exheaderfont}{\docmaincolor}
+
+\newcommand{\plainnp}[2]
+{%
+\stepcounter{parcounter}\vspace{\parpreskip}
+    \reversemarginpar\marginnote{\color{\exheaderfont}\fontfamily{phv}\selectfont\small\raggedright (#1\thechapter.\theparcounter)\\\scriptsize#2}
+    \noindent
+}
+
+\newcommand{\np}[1][]{\plainnp{}{#1}}
+\newcommand{\ex}[1][]{\plainnp{EX\ }{#1}}
+\newcommand{\qn}[1][]{\plainnp{QN\ }{#1}}
+
+\DeclareOption{note}{}
+
+\DeclareOption{assignment}
+{%
+    \renewcommand{\qn}
+    {%
+    \stepcounter{parcounter}\vspace{\parpreskip}
+        \reversemarginpar\marginnote{\color{\exheaderfont}\fontfamily{phv}\selectfont QN. \theparcounter\raggedright}
+        \noindent
+    }
+}
+
+\DeclareOption{cs}
+{%
+\lstdefinestyle{lststyle}{
+    backgroundcolor=\color{pink}, 
+    basicstyle=\ttfamily\small,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=4
+}
+
+\lstset{style=lststyle}
+
+\lstnewenvironment{code}[1]{%
+    \stepcounter{stcounter}
+    \vspace{7.7pt}
+    \marginnote{\color{\stheaderfontcolor}\stheaderfont\raggedright Code \thechapter.\thestcounter.\\ \stsubheaderfont #1}
+    \vspace{-7.7pt}
+}{}
+}
+
+\ExecuteOptions{note}
+
+\ProcessOptions\relax
+
+\newcommand{\note}[1]{\reversemarginpar\marginnote{\raggedright \textit{#1}}}
+
+%% =========================================================
+%% mdframed
+
+%% sideruled and box_like environments are defined as style guides
+\newenvironment{sideruled}
+{\begin{mdframed}[topline=false,bottomline=false,rightline=false,
+    linewidth=4pt,
+    innertopmargin=0pt, innerbottommargin=0pt, innerrightmargin=0pt]
+}
+{\end{mdframed}}
+
+\newenvironment{box_like}
+{\noindent\begin{mdframed}[backgroundcolor=pink,
+    topline=false,bottomline=false,rightline=false,leftline=false,
+    innertopmargin=10pt, innerrightmargin=10pt]}
+{\end{mdframed}}
+
+%% definition
+
+\newcommand{\defnpreskip}{10pt}
+
+\newenvironment{plaindefinition}[3]
+{\vspace{\defnpreskip}\begin{mdframed}[topline=false,bottomline=false,rightline=false,
+    linewidth=4pt, linecolor=\docmaincolor,
+    innertopmargin=0pt, innerbottommargin=0pt, innerrightmargin=0pt]
+    {\color{\docmaincolor}\fontfamily{phv}\selectfont\small\textbf{#1. #2} #3} \\
+}
+{\end{mdframed}}
+
+\newenvironment{definition}[2]
+{\begin{plaindefinition}{Def'n}{#1}{#2}}
+{\end{plaindefinition}}
+
+\newenvironment{recall}[2]
+{\begin{plaindefinition}{Recall}{#1}{#2}}
+{\end{plaindefinition}}
+
+%% =========================================================
+%% soul
+
+\sethlcolor{lime}
+
+%% =========================================================
+%% titlesec
+
+\newcommand{\chapterstyle}{\color{\docmaincolor}\serifastd\selectfont\bfseries\Huge}
+\titleformat{\chapter}[display]{\chapterstyle}{\thechapter.}{0pt}{}
+
+\newcommand{\executeforeachchap}[1]{\thispagestyle{empty}\clearpage\setcounter{parcounter}{0}\setcounter{stcounter}{0}}
+\newcommand{\chap}[1]{\savegeometry{defaultgeometry}\newgeometry{margin=2cm}\chapter{#1}\localtoc\executeforeachchap{#1}\loadgeometry{defaultgeometry}}
+
+\newcommand{\secpreskip}{10pt}
+
+\newcommand{\sectionstyle}{\vspace{\secpreskip}\color{\docmaincolor}\serifastd\selectfont\LARGE}
+\titleformat{\section}{\sectionstyle}{}{0pt}{}
+
+%% =========================================================
+%% tocloft
+
+\newcommand{\localtocrule}{\rule{10cm}{1pt}}
+
+\newcommand{\localtoc}{
+    \localtocrule 
+    \etocsettocstyle{}{}
+    \setlength{\cftsecindent}{0pt}\renewcommand{\cftdot}{}\cftpagenumbersoff{section}
+    \renewcommand{\cftsecfont}{\normalfont\sffamily}
+    \renewcommand{\cftsecpagefont}{\normalfont\sffamily}
+    \localtableofcontents
+    \vspace{-5pt}\noindent\localtocrule
+}
+
+\newcommand{\toc}{
+    \savegeometry{defaultgeometry}
+    \newgeometry{margin=2cm}
+    \renewcommand{\cfttoctitlefont}{\serifastd\selectfont\Huge\color{\docmaincolor}\textbf}
+    \cftpagenumbersoff{chapter}
+    \pagenumbering{gobble}
+    \tableofcontents
+    \cleardoublepage
+    \loadgeometry{defaultgeometry}
+    \pagenumbering{arabic}
+}
+
+%% =========================================================
+%% xcolor
+
+% pink themed
+\definecolor{palepink}{HTML}{F9CCCA}
+\definecolor{solidpink}{HTML}{893843}
+
+% violet themed
+\definecolor{lilac}{HTML}{DCD0FF}
+\definecolor{violet}{HTML}{843179}
+
+% brown themed
+\definecolor{almond}{HTML}{EED9C4}
+\definecolor{taupe}{HTML}{483C32}
+
+% green themed
+\definecolor{opal}{HTML}{A8C3BC}
+\definecolor{midnightgreen}{HTML}{004C54}
+
+% blue themed
+\definecolor{columbiablue}{HTML}{B9D9EB}
+\definecolor{independence}{HTML}{4C516D}
+
+% gray themed
+\definecolor{ashgray}{HTML}{B2BEB5}
+\definecolor{gunmetal}{HTML}{2A3439}
+
+%% =========================================================
+%% misc
+
+\newcommand{\doctitle}{}
+
+\newcounter{parcounter}
+\setcounter{parcounter}{0}
+
+\DeclareTextFontCommand{\emph}{\bfseries\em}
+
+\newcommand{\docmaincolor}{violet}
+\newcommand{\docsubcolor}{lilac}
+
+%% sets summation and Cartesian product symbols to ones used in Computer Modern typeface
+
+\DeclareFontFamily{U} {cmex}{}
+
+\DeclareFontShape{U}{cmex}{m}{n}{
+  <-8> cmex7
+  <8-9> cmex8
+  <9-10> cmex9
+  <10-> cmex10}{}
+
+\DeclareSymbolFont{Xcmex} {U} {cmex}{m}{n}
+
+\DeclareMathSymbol{\Xdsum}{\mathop}{Xcmex}{88}
+\DeclareMathSymbol{\Xtsum}{\mathop}{Xcmex}{80}
+\let\sum\relax
+\DeclareMathOperator{\sum}{\mathchoice{\Xdsum}{\Xtsum}{\Xtsum}{\Xtsum}}
+\DeclareMathSymbol{\Xdprod}{\mathop}{Xcmex}{89}
+\DeclareMathSymbol{\Xtprod}{\mathop}{Xcmex}{81}
+\let\prod\relax
+\DeclareMathOperator{\prod}{\mathchoice{\Xdprod}{\Xtprod}{\Xtprod}{\Xtprod}}
+
+%% proof style macros
+\newcommand{\proofheaderfont}{\color{\docmaincolor}\serifastd\selectfont\small\textbf}
+\newcommand{\qedsym}{\textcolor{\docmaincolor}{\rule{0.75ex}{1.5ex}}}
+\newcommand{\subqedsym}{\textcolor{\docmaincolor}{\rule{0.5ex}{1.5ex}}}
+\newcommand{\proofpreskip}{5pt}
+\newcommand{\proofpostskip}{10pt}
+
+\newif\ifqedplaced
+
+\newenvironment{proof}[1][Proof]{
+    \global\qedplacedfalse
+    \vspace{\proofpreskip}
+    \begingroup\noindent\proofheaderfont{#1. }\endgroup
+}{
+    \ifqedplaced %
+    \else
+        \hspace*{\fill}$\qedsym$ % \hspace*{\fill} is used instead of \hfill
+    \fi%                         % becasue \hfill is ignored whenever it is the first element of a line 
+
+    \vspace{\proofpostskip}
+}
+
+%% qed placement at the end of an equation 
+\newcommand{\eqedsym}{
+    \global\qedplacedtrue
+    \eqno\hbox{$\qedsym$}
+}
+
+%% qed placement at the end of an equation 
+\newcommand{\eqqedsym}{
+    \global\qedplacedtrue
+    \eqno\hbox{$\subqedsym$}
+}
+
+%% qed placement at the end of a flalign
+\newcommand{\fqedsym}{
+    \global\qedplacedtrue
+    \qedsym
+}
+
+%% qed placement at the end of a flalign
+\newcommand{\fqqedsym}{
+    \global\qedplacedtrue
+    \subqedsym
+}
+
+%% place qedsym at wherever you want!
+\newcommand{\qqedsym}{
+    \global\qedplacedtrue
+    \hspace*{\fill}$\qedsym$
+}
+
+%% place subqedsym at wherever you want!
+\newcommand{\qqqedsym}{
+    \global\qedplacedtrue
+    \hspace*{\fill}$\subqedsym$
+}
+
+%% suppresses qed symbol
+\newcommand{\suppressqedsym}{
+    \global\qedplacedtrue
+}
+
+%% statement-like environments
+
+%% counters
+
+\newcounter{stcounter}
+\setcounter{stcounter}{0}
+
+\newcounter{corcounter}
+\setcounter{corcounter}{0}
+
+\newcounter{axcounter}
+\setcounter{axcounter}{0}
+
+%% statement style macros
+\newcommand{\stheaderfontcolor}{\docmaincolor}
+\newcommand{\stheaderfont}{\fontfamily{phv}\selectfont\bfseries\small}
+\newcommand{\stsubheaderfont}{\normalfont\fontfamily{phv}\selectfont\footnotesize}
+\newcommand{\stpreskip}{10pt}
+\newcommand{\stpostskip}{0pt}
+\newcommand{\stbackgroundcolor}{\docsubcolor}
+
+%% template
+\newenvironment{plainstatement}[2]{%
+    \setcounter{corcounter}{0}\stepcounter{stcounter}
+    \vspace{\stpreskip}\vspace{7.7pt}
+    \reversemarginpar
+    \marginnote{\color{\stheaderfontcolor}\stheaderfont\raggedright #1 \thechapter.\thestcounter.\\ \stsubheaderfont #2}
+    \vspace{-7.7pt}
+    \begin{mdframed}[backgroundcolor=\stbackgroundcolor,
+        topline=false,rightline=false,leftline=false,bottomline=false,
+        innerleftmargin=5pt, innerrightmargin=5pt]
+        \it 
+}{%
+    \end{mdframed}\vspace{\stpostskip}
+}
+
+%% some pre-defined wrappers 
+\newenvironment{prop}       [1]{\begin{plainstatement}{Proposition}{#1}}{\end{plainstatement}}
+\newenvironment{statement}  [1]{\begin{plainstatement}{Statement}  {#1}}{\end{plainstatement}}
+\newenvironment{theorem}    [1]{\begin{plainstatement}{Theorem}    {#1}}{\end{plainstatement}}
+\newenvironment{lemma}      [1]{\begin{plainstatement}{Lemma}      {#1}}{\end{plainstatement}}
+
+%% corollary and axiom require different styles
+\newenvironment{plaincorollary}[2]{%
+    \stepcounter{corcounter}
+    \vspace{\stpreskip}\vspace{7.7pt}
+    \reversemarginpar
+    \marginnote{\color{\stheaderfontcolor}\stheaderfont\raggedright #1 \thechapter.\thestcounter.\thecorcounter.\\ \stsubheaderfont #2}
+    \vspace{-7.7pt}
+    \begin{mdframed}[backgroundcolor=\stbackgroundcolor,
+        topline=false,rightline=false,leftline=false,bottomline=false,
+        innerleftmargin=5pt, innerrightmargin=5pt]
+        \it
+}{%
+    \end{mdframed}\vspace{\stpostskip}
+}
+
+\newenvironment{cor}         [1]{\begin{plaincorollary}{Corollary}{#1}}{\end{plaincorollary}}
+\newenvironment{lemma_inside}[1]{\begin{plaincorollary}{Lemma}{#1}}    {\end{plaincorollary}}
+
+\newenvironment{axiom}[1]{%
+    \stepcounter{axcounter}
+    \vspace{\stpreskip}\vspace{7.7pt}
+    \reversemarginpar
+    \marginnote{\color{\stheaderfontcolor}\stheaderfont\raggedright Axiom \theaxcounter.\\ \stsubheaderfont #1}
+    \vspace{-7.7pt}
+    \begin{mdframed}[backgroundcolor=\stbackgroundcolor,
+        topline=false,rightline=false,leftline=false,bottomline=false,
+        innerleftmargin=5pt, innerrightmargin=5pt]
+        \it
+}{%
+    \end{mdframed}\vspace{\stpostskip}
+}
+
+%% icon symbols for various fields of mathematics
+
+\newcommand{\analysisicon}{\includegraphics[width=100pt,height=100pt]{tortoise}}
+\newcommand{\algebraicon}{\includegraphics[width=100pt,height=100pt]{cube}}
+\newcommand{\probabilityicon}{\includegraphics[width=100pt,height=100pt]{suits}}
+
+%% cleardoublepage
+
+\makeatletter
+\def\cleardoublepage{
+    \clearpage
+        \ifodd\c@page
+        \else
+            \vspace*{\fill}
+            \hfill
+            \begin{center}
+                \emph{\large This page intentionally left blank.}
+            \end{center}
+            \vspace{\fill}
+            \thispagestyle{empty}
+        \newpage
+    \fi
+}
+\makeatother
+
+%% equation numbering style
+
+\newtagform{brackets}{[}{]}
+\usetagform{brackets}
+
+%% =========================================================
