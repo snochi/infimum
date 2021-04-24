@@ -32,6 +32,7 @@
 \DeclareMathOperator{\power}{\mathcal{P}}
 
 %% functions
+\DeclareMathOperator{\codomain}{codomain}
 \DeclareMathOperator{\domain}{domain}
 \DeclareMathOperator{\nul}{null}
 \let\graph\relax
@@ -114,6 +115,7 @@
 \DeclareMathOperator{\dtau}{\,d\tau}
 \DeclareMathOperator{\dphi}{\,d\varphi}
 \DeclareMathOperator{\dpsi}{\,d\psi}
+\DeclareMathOperator{\dtheta}{\,d\theta}
 
 %% partial differentials
 \DeclareMathOperator{\pd}{\,\partial}
@@ -151,6 +153,30 @@
 \DeclareMathOperator{\cl}{cl}
 \DeclareMathOperator{\bd}{bd}
 
+%% complex elementary functions
+\DeclareMathOperator{\Log}{Log}
+\DeclareMathOperator{\LL}{L}
+\DeclareMathOperator{\PV}{P.V.}
+\DeclareMathOperator{\Arg}{Arg}
+
+%% ========================================================
+%% combinatorics
+
+\DeclareMathOperator{\des}{des}
+\DeclareMathOperator{\ltr}{l2r}
+\DeclareMathOperator{\cyc}{cyc}
+\DeclareMathOperator{\maj}{maj}
+\DeclareMathOperator{\inv}{inv}
+\DeclareMathOperator{\id}{id}
+
+%% ========================================================
+%% geometry
+
+\DeclareMathOperator{\aff}{aff}
+\DeclareMathOperator{\ccone}{char.cone}
+\DeclareMathOperator{\cone}{cone}
+\DeclareMathOperator{\conv}{conv}
+
 %% ========================================================
 %% probability and statistics
 
@@ -161,6 +187,14 @@
 \DeclareMathOperator{\sd}{sd}
 \DeclareMathOperator{\cov}{cov}
 \DeclareMathOperator{\corr}{cor}
+
+%% distributions
+\DeclareMathOperator{\normaldis}{G}
+\DeclareMathOperator{\poissondis}{Poi}
+\DeclareMathOperator{\gammadis}{\Gamma}
+\DeclareMathOperator{\expdis}{Exp}
+\DeclareMathOperator{\binomdis}{Binomial}
+\DeclareMathOperator{\tdis}{t}
 
 %% ========================================================
 %% greek latters
@@ -174,6 +208,7 @@
 %% misc
 
 %% mathcal latters
+
 \DeclareMathOperator{\mA}{\mathcal{A}}
 \DeclareMathOperator{\mB}{\mathcal{B}}
 \DeclareMathOperator{\mC}{\mathcal{C}}
@@ -203,5 +238,22 @@
 
 \let\mod\relax
 \DeclareMathOperator{\mod}{\,mod\,}
+
+\DeclareMathOperator{\size}{size}
+
+\DeclareMathOperator{\argmax}{argmax}
+
+%% multiset
+
+\newcommand{\mch}[2]{
+\left.\mathchoice
+  {\left(\kern-0.48em\binom{#1}{#2}\kern-0.48em\right)}
+  {\big(\kern-0.30em\binom{\smash{#1}}{\smash{#2}}\kern-0.30em\big)}
+  {\left(\kern-0.30em\binom{\smash{#1}}{\smash{#2}}\kern-0.30em\right)}
+  {\left(\kern-0.30em\binom{\smash{#1}}{\smash{#2}}\kern-0.30em\right)}
+\right.}
+
+%% other blackboard boldface letters
+\DeclareMathOperator{\B}{\mathbb{B}}
 
 %% ========================================================

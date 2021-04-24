@@ -20,7 +20,6 @@
 \RequirePackage{soul}               % for highlighting a text
 \RequirePackage{solphyssym}
 %\RequirePackage{stmaryrd}           % \llbracket, \rrbracket
-\RequirePackage{tabularx}
 \RequirePackage{titlesec}
 \RequirePackage{tocloft}
 \RequirePackage{xcolor}
@@ -29,14 +28,9 @@
 \RequirePackage{etoc}               % this must come after tocloft
 
 \RequirePackage{bm}           % bold math fonts
-\RequirePackage{caption}
 
 \RequirePackage{listings}
-
-%% =========================================================
-%% caption
-
-%\captionsetup[figure]{}
+\RequirePackage{tabularx}
 
 %% =========================================================
 %% enumitem
@@ -66,8 +60,7 @@
 %% offsets
 \fancyheadoffset[L]{\marginparwidth+\marginparsep}
 
-%% chaptermark, sectionmark
-\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+%% sectionmark
 \renewcommand{\sectionmark}[1]{\markright{#1}}
 
 %% headers
@@ -75,9 +68,9 @@
 {%
 \fontfamily{phv}\selectfont
 \checkoddpage\ifoddpage%
-    \thepage\ \ \ \ \ \ \ \ \ \ \nouppercase{\textbf{\leftmark}}\ \ |\ \ \nouppercase{\rightmark}
+    \thepage\ \ \ \ \ \ \ \ \ \ \nouppercase{\textbf{\doctitlel}}\ \ |\ \ \nouppercase{\rightmark}
 \else%
-    \doctitle
+    \doctitler
 \fi%
 }
 
@@ -85,9 +78,9 @@
 {%
 \fontfamily{phv}\selectfont
 \checkoddpage\ifoddpage%
-    \doctitle
+    \doctitler
 \else%
-    \nouppercase{\textbf{\leftmark}}\ \ |\ \ \nouppercase{\rightmark}\ \ \ \ \ \ \ \ \ \ \thepage
+    \nouppercase{\textbf{\doctitlel}}\ \ |\ \ \nouppercase{\rightmark}\ \ \ \ \ \ \ \ \ \ \thepage
 \fi%
 }
 
@@ -113,7 +106,7 @@
 \newcommand{\plainnp}[2]
 {%
 \stepcounter{parcounter}\vspace{\parpreskip}
-    \reversemarginpar\marginnote{\color{\exheaderfont}\fontfamily{phv}\selectfont\small\raggedright (#1\thechapter.\theparcounter)\\\scriptsize#2}
+    \reversemarginpar\marginnote{\color{\exheaderfont}\fontfamily{phv}\selectfont\small\raggedright (#1\thesection.\theparcounter)\\\scriptsize#2}
     \noindent
 }
 
@@ -154,7 +147,7 @@
     innertopmargin=0pt, innerbottommargin=0pt, innerrightmargin=0pt]
     {\color{\docmaincolor}\fontfamily{phv}\selectfont\small\textbf{#2} #3} \\
     \reversemarginpar
-    \marginnote{\color{\docmaincolor}\fontfamily{phv}\selectfont\small\textbf{#1 \thechapter.\thedefncounter.}}
+    \marginnote{\color{\docmaincolor}\fontfamily{phv}\selectfont\small\textbf{#1 \thesection.\thedefncounter.}}
 }
 {\end{mdframed}}
 
@@ -178,16 +171,17 @@
 %% =========================================================
 %% titlesec
 
-\newcommand{\chapterstyle}{\color{\docmaincolor}\serifastd\selectfont\bfseries\Huge}
-\titleformat{\chapter}[display]{\chapterstyle}{\thechapter.}{0pt}{}
-
-\newcommand{\executeforeachchap}[1]{\thispagestyle{empty}\clearpage\setcounter{parcounter}{0}\setcounter{stcounter}{0}\setcounter{defncounter}{0}}
-\newcommand{\chap}[1]{\savegeometry{defaultgeometry}\newgeometry{margin=2cm}\chapter{#1}\localtoc\executeforeachchap{#1}\loadgeometry{defaultgeometry}}
-
 \newcommand{\secpreskip}{10pt}
 
+\newcommand{\executeforeachsec}{\setcounter{parcounter}{0}\setcounter{stcounter}{0}\setcounter{equation}{0}}
+
 \newcommand{\sectionstyle}{\vspace{\secpreskip}\color{\docmaincolor}\serifastd\selectfont\LARGE}
-\titleformat{\section}{\sectionstyle}{}{0pt}{}
+\titleformat{\section}{\sectionstyle}{}{0pt}{\executeforeachsec}
+
+\newcommand{\subsecpreskip}{10pt}
+
+\newcommand{\subsectionstyle}{\vspace{\subsecpreskip}\color{\docmaincolor}\serifastd\selectfont\Large}
+\titleformat{\subsection}{\subsectionstyle}{}{0pt}{}
 
 %% =========================================================
 %% tocloft
@@ -246,7 +240,8 @@
 %% =========================================================
 %% misc
 
-\newcommand{\doctitle}{}
+\newcommand{\doctitler}{}
+\newcommand{\doctitlel}{}
 
 \newcounter{parcounter}
 \setcounter{parcounter}{0}
@@ -381,7 +376,7 @@
 \newcommand{\stpreskip}{10pt}
 \newcommand{\stpostskip}{0pt}
 \newcommand{\stbackgroundcolor}{\docsubcolor}
-\newcommand{\stnumbering}{\thechapter.\thestcounter.}
+\newcommand{\stnumbering}{\thesection.\thestcounter.}
 
 %% template
 \newenvironment{plainstatement}[2]{%
@@ -404,7 +399,7 @@
 \newenvironment{theorem}    [1]{\begin{plainstatement}{Theorem}    {#1}}{\end{plainstatement}}
 \newenvironment{lemma}      [1]{\begin{plainstatement}{Lemma}      {#1}}{\end{plainstatement}}
 
-\newcommand{\cornumbering}{\thechapter.\thestcounter.\thecorcounter.}
+\newcommand{\cornumbering}{\thesection.\thestcounter.\thecorcounter.}
 
 %% corollary and axiom require different styles
 \newenvironment{plaincorollary}[2]{%
@@ -468,6 +463,8 @@
 \newtagform{brackets}{[}{]}
 \usetagform{brackets}
 
+\renewcommand{\theequation}{\thesection.\arabic{equation}}
+
 %% equation box
 
 \newenvironment{eqbox}[1][]
@@ -498,37 +495,10 @@
 
 \DeclareOption{note}{}
 
-\DeclareOption{assignment}
-{%
-    \renewcommand{\qn}
-    {%
-    \setcounter{equation}{0}
-    \stepcounter{parcounter}\vspace{\parpreskip}
-        \reversemarginpar\marginnote{\color{\exheaderfont}\fontfamily{phv}\selectfont QN. \theparcounter\raggedright}
-        \noindent
-    }
-
-    \renewcommand{\theequation}{\theparcounter.\arabic{equation}}
-
-    \renewcommand{\stnumbering}{\thestcounter.}
-    \renewcommand{\cornumbering}{\thestcounter.\thecorcounter.}
-
-    \renewenvironment{definition}[2]
-    {\stepcounter{defncounter}
-    \vspace{\defnpreskip}\begin{mdframed}[topline=false,bottomline=false,rightline=false,
-        linewidth=4pt, linecolor=\docmaincolor,
-        innertopmargin=0pt, innerbottommargin=0pt, innerrightmargin=0pt]
-        {\color{\docmaincolor}\fontfamily{phv}\selectfont\small\textbf{#1} #2} \\
-        \reversemarginpar
-        \marginnote{\color{\docmaincolor}\fontfamily{phv}\selectfont\small\textbf{Def'n \thedefncounter.}}
-    }
-    {\end{mdframed}}
-}
-
 \DeclareOption{cs}
 {%
 \newcommand{\numberstyle}{\ubuntumono\selectfont\footnotesize\bfseries}
-\lstset{basicstyle=\ubuntumono\selectfont\footnotesize, numbers=left, numberstyle=\numberstyle, showstringspaces=false, upquote=true}
+\lstset{basicstyle=\ubuntumono\selectfont\footnotesize, numbers=left, numberstyle=\numberstyle}
 }
 
 \ExecuteOptions{note}
