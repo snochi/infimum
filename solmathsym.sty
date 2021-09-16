@@ -31,43 +31,49 @@
 \DeclareMathOperator{\insec}{\bigcap}
 \DeclareMathOperator{\power}{\mathcal{P}}
 
-%% functions
+%% function
 \DeclareMathOperator{\codomain}{codomain}
 \DeclareMathOperator{\domain}{domain}
 \DeclareMathOperator{\nul}{null}
+\DeclareMathOperator{\image}{image}
 \let\graph\relax
 \DeclareMathOperator{\graph}{graph}
+
+\DeclareMathOperator{\supp}{supp}
+
+%% ========================================================
+%% group theory
+
+\DeclareMathOperator{\gl}{GL}                     % general linear group
+\let\sl\relax
+\DeclareMathOperator{\sl}{SL}                     % special linear group
+\DeclareMathOperator{\sub}{sub}                   % collection of subgroups
+\DeclareMathOperator{\normalsub}{\trianglelefteq} % normal subgroup
+\DeclareMathOperator{\conj}{conj}                 % conjugacy class
 
 %% ========================================================
 %% ring theory
 
 \let\char\relax
-\DeclareMathOperator{\char}{char}
+\DeclareMathOperator{\char}{char}                 % characteristic of a ring
+\DeclareMathOperator{\ev}{ev}                     % evaluation map
+\DeclareMathOperator{\lcm}{lcm}                   % least common multiple
 
 %% ========================================================
 %% linear algebra
 
-%% operators for properties of linear transformation
 \DeclareMathOperator{\spn}{span}
 \DeclareMathOperator{\nullity}{nullity}
 \DeclareMathOperator{\rank}{rank}
 
-%% range (image) of a linear transformation
-\DeclareMathOperator{\image}{image}
-
-%% column and row of a matrix
 \DeclareMathOperator{\col}{Col}
 \DeclareMathOperator{\row}{Row}
 
-%% adjugate, trace of a matrix
-\DeclareMathOperator{\adj}{adj}
-\DeclareMathOperator{\tr}{tr}
-
-%% norm
-\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\DeclareMathOperator{\adj}{adj} % adjugate
+\DeclareMathOperator{\tr}{tr}   % trace
 
 %% ========================================================
-%% complex number
+%% complex numbers
 
 \DeclareMathOperator{\re}{Re}
 \DeclareMathOperator{\im}{Im} 
@@ -153,11 +159,17 @@
 \DeclareMathOperator{\cl}{cl}
 \DeclareMathOperator{\bd}{bd}
 
+%% Jacobian
+\DeclareMathOperator{\jac}{J}
+
 %% complex elementary functions
 \DeclareMathOperator{\Log}{Log}
 \DeclareMathOperator{\LL}{L}
 \DeclareMathOperator{\PV}{P.V.}
 \DeclareMathOperator{\Arg}{Arg}
+
+%% residue
+\DeclareMathOperator{\res}{res}
 
 %% ========================================================
 %% combinatorics
@@ -168,6 +180,11 @@
 \DeclareMathOperator{\maj}{maj}
 \DeclareMathOperator{\inv}{inv}
 \DeclareMathOperator{\id}{id}
+
+%% ========================================================
+%% graph theory
+
+\DeclareMathOperator{\rad}{rad}
 
 %% ========================================================
 %% geometry
@@ -190,11 +207,26 @@
 
 %% distributions
 \DeclareMathOperator{\normaldis}{G}
-\DeclareMathOperator{\poissondis}{Poi}
+\DeclareMathOperator{\poidis}{POI}
 \DeclareMathOperator{\gammadis}{\Gamma}
 \DeclareMathOperator{\expdis}{Exp}
-\DeclareMathOperator{\binomdis}{Binomial}
+\DeclareMathOperator{\binomdis}{BIN}
 \DeclareMathOperator{\tdis}{t}
+\DeclareMathOperator{\berdis}{B}
+\DeclareMathOperator{\negdis}{NB}
+\DeclareMathOperator{\geodis}{GEO}
+\DeclareMathOperator{\dudis}{DU}
+\DeclareMathOperator{\hypdis}{HG}
+\DeclareMathOperator{\unidis}{U}
+\DeclareMathOperator{\betadis}{BETA}
+\DeclareMathOperator{\erdis}{ERLANG}
+
+%% ========================================================
+%% numerical analysis
+
+%% floating point approximation
+\DeclareMathOperator{\fl}{\text{fl}}
+
 
 %% ========================================================
 %% greek latters

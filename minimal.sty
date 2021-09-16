@@ -73,7 +73,7 @@
 %% headers
 \lhead
 {%
-\fontfamily{phv}\selectfont
+\itckabelstd\selectfont
 \checkoddpage\ifoddpage%
     \thepage\ \ \ \ \ \ \ \ \ \ \nouppercase{\textbf{\leftmark}}\ \ |\ \ \nouppercase{\rightmark}
 \else%
@@ -83,7 +83,7 @@
 
 \rhead
 {%
-\fontfamily{phv}\selectfont
+\itckabelstd\selectfont
 \checkoddpage\ifoddpage%
     \doctitle
 \else%
@@ -96,8 +96,11 @@
 
 \newfontfamily{\serifastd}{Serifa Std}
 \newfontfamily{\ubuntumono}{Ubuntu Mono}
+\newfontfamily{\itckabelstd}{ITC Kabel Std}
+\newfontfamily{\avantgarde}{ITC Avant Garde Gothic Std}
 
 \setmonofont{Ubuntu Mono}
+\setmainfont[ItalicFont={Minion Pro Italic},BoldFont={Minion Pro Bold},BoldItalicFont={Minion Pro Bold Italic}]{Minion Pro}
 
 %% =========================================================
 %% graphicx
@@ -113,7 +116,7 @@
 \newcommand{\plainnp}[2]
 {%
 \stepcounter{parcounter}\vspace{\parpreskip}
-    \reversemarginpar\marginnote{\color{\exheaderfont}\fontfamily{phv}\selectfont\small\raggedright (#1\thechapter.\theparcounter)\\\scriptsize#2}
+    \reversemarginpar\marginnote{\color{\exheaderfont}\itckabelstd\selectfont\small\raggedright (#1\thechapter.\theparcounter)\\\scriptsize#2}
     \noindent
 }
 
@@ -143,6 +146,7 @@
 %% definition
 
 \newcommand{\defnpreskip}{10pt}
+\newcommand{\defncolor}{independence}
 
 \newcounter{defncounter}
 \setcounter{defncounter}{0}
@@ -150,11 +154,11 @@
 \newenvironment{plaindefinition}[3]
 {\stepcounter{defncounter}
 \vspace{\defnpreskip}\begin{mdframed}[topline=false,bottomline=false,rightline=false,
-    linewidth=4pt, linecolor=\docmaincolor,
+    linewidth=4pt, linecolor=\defncolor,
     innertopmargin=0pt, innerbottommargin=0pt, innerrightmargin=0pt]
-    {\color{\docmaincolor}\fontfamily{phv}\selectfont\small\textbf{#2} #3} \\
+    {\color{\defncolor}\itckabelstd\selectfont\small\textbf{#2} #3} \\
     \reversemarginpar
-    \marginnote{\color{\docmaincolor}\fontfamily{phv}\selectfont\small\textbf{#1 \thechapter.\thedefncounter.}}
+    \marginnote{\color{\defncolor}\itckabelstd\selectfont\small#1 \thechapter.\thedefncounter}
 }
 {\end{mdframed}}
 
@@ -178,16 +182,29 @@
 %% =========================================================
 %% titlesec
 
-\newcommand{\chapterstyle}{\color{\docmaincolor}\serifastd\selectfont\bfseries\Huge}
+% part
+\newcommand{\partstyle}{\serifastd\selectfont\bfseries\Huge}
+\titleformat{\part}[display]{\partstyle}{\thepart.}{0pt}{\thispagestyle{empty}}
+
+\newcommand{\partpage}[1]{\savegeometry{defaultgeometry}\newgeometry{margin=2cm}\part{#1}\thispagestyle{empty}\localtoc\loadgeometry{defaultgeometry}}
+
+% chap
+\newcommand{\chapterstyle}{\serifastd\selectfont\bfseries\Huge}
 \titleformat{\chapter}[display]{\chapterstyle}{\thechapter.}{0pt}{}
 
-\newcommand{\executeforeachchap}[1]{\thispagestyle{empty}\clearpage\setcounter{parcounter}{0}\setcounter{stcounter}{0}\setcounter{defncounter}{0}}
-\newcommand{\chap}[1]{\savegeometry{defaultgeometry}\newgeometry{margin=2cm}\chapter{#1}\localtoc\executeforeachchap{#1}\loadgeometry{defaultgeometry}}
+\newcommand{\executeforeachchap}{\thispagestyle{empty}\clearpage\setcounter{parcounter}{0}\setcounter{stcounter}{0}\setcounter{defncounter}{0}}
+\newcommand{\chap}[1]{\savegeometry{defaultgeometry}\newgeometry{margin=2cm}\chapter{#1}\localtoc\executeforeachchap\loadgeometry{defaultgeometry}}
 
+% section
 \newcommand{\secpreskip}{10pt}
 
-\newcommand{\sectionstyle}{\vspace{\secpreskip}\color{\docmaincolor}\serifastd\selectfont\LARGE}
-\titleformat{\section}{\sectionstyle}{}{0pt}{}
+\newcommand{\sectionstyle}{\vspace{\secpreskip}\serifastd\selectfont\LARGE}
+\titleformat{\section}{\sectionstyle}{}{0pt}{}[
+    \vspace{-22pt}%
+    \reversemarginpar%
+    \marginnote{\serifastd\selectfont\small\raggedleft \thesection}%
+    \vspace{22pt}%
+]
 
 %% =========================================================
 %% tocloft
@@ -195,6 +212,7 @@
 \newcommand{\localtocrule}{\rule{10cm}{1pt}}
 
 \newcommand{\localtoc}{
+    \noindent
     \localtocrule 
     \etocsettocstyle{}{}
     \setlength{\cftsecindent}{0pt}\renewcommand{\cftdot}{}\cftpagenumbersoff{section}
@@ -219,27 +237,27 @@
 %% =========================================================
 %% xcolor
 
-% pink themed
+% pink 
 \definecolor{solidpink}{HTML}{893843}
 \definecolor{palepink}{HTML}{F9CCCA}
 
-% violet themed
+% violet 
 \definecolor{violet}{HTML}{843179}
 \definecolor{lilac}{HTML}{DCD0FF}
 
-% brown themed
+% brown
 \definecolor{taupe}{HTML}{483C32}
 \definecolor{almond}{HTML}{EED9C4}
 
-% green themed
+% green
 \definecolor{midnightgreen}{HTML}{004C54}
 \definecolor{opal}{HTML}{A8C3BC}
 
-% blue themed
-\definecolor{independence}{HTML}{4C516D}
+% blue
+\definecolor{independence}{HTML}{1F305E}
 \definecolor{columbiablue}{HTML}{B9D9EB}
 
-% gray themed
+% gray
 \definecolor{gunmetal}{HTML}{2A3439}
 \definecolor{lightgray}{HTML}{D3D3D3}
 
@@ -253,8 +271,8 @@
 
 \DeclareTextFontCommand{\emph}{\bfseries\em}
 
-\newcommand{\docmaincolor}{violet}
-\newcommand{\docsubcolor}{lilac}
+\newcommand{\docmaincolor}{taupe}
+\newcommand{\docsubcolor}{almond}
 
 %% sets summation and Cartesian product symbols to ones used in Computer Modern typeface
 
@@ -278,7 +296,7 @@
 \DeclareMathOperator{\prod}{\mathchoice{\Xdprod}{\Xtprod}{\Xtprod}{\Xtprod}}
 
 %% proof style macros
-\newcommand{\proofheaderfont}{\color{\docmaincolor}\serifastd\selectfont\small\textbf}
+\newcommand{\proofheaderfont}{\color{\docmaincolor}\itckabelstd\selectfont\small\textbf}
 \newcommand{\qedsym}{\textcolor{\docmaincolor}{\rule{0.75ex}{1.5ex}}}
 \newcommand{\subqedsym}{\textcolor{\docmaincolor}\triangleleft}
 \newcommand{\proofpreskip}{5pt}
@@ -299,7 +317,7 @@
     \vspace{\proofpostskip}
 }
 
-\newcommand{\subproofheaderfont}{\color{\docmaincolor}\serifastd\selectfont\small\underline}
+\newcommand{\subproofheaderfont}{\color{\docmaincolor}\itckabelstd\selectfont\small\underline}
 \newenvironment{subproof}[1][Proof]{
     \global\qedplacedfalse
     \vspace{\proofpreskip}
@@ -375,13 +393,13 @@
 \setcounter{axcounter}{0}
 
 %% statement style macros
-\newcommand{\stheaderfontcolor}{\docmaincolor}
-\newcommand{\stheaderfont}{\fontfamily{phv}\selectfont\bfseries\small}
-\newcommand{\stsubheaderfont}{\normalfont\fontfamily{phv}\selectfont\footnotesize}
+\newcommand{\stbackgroundcolor}{almond}
+\newcommand{\stheaderfontcolor}{taupe}
+\newcommand{\stheaderfont}{\itckabelstd\selectfont}
+\newcommand{\stsubheaderfont}{\normalfont\itckabelstd\selectfont\tiny}
 \newcommand{\stpreskip}{10pt}
 \newcommand{\stpostskip}{0pt}
-\newcommand{\stbackgroundcolor}{\docsubcolor}
-\newcommand{\stnumbering}{\thechapter.\thestcounter.}
+\newcommand{\stnumbering}{\thechapter.\thestcounter}
 
 %% template
 \newenvironment{plainstatement}[2]{%
@@ -404,7 +422,7 @@
 \newenvironment{theorem}    [1]{\begin{plainstatement}{Theorem}    {#1}}{\end{plainstatement}}
 \newenvironment{lemma}      [1]{\begin{plainstatement}{Lemma}      {#1}}{\end{plainstatement}}
 
-\newcommand{\cornumbering}{\thechapter.\thestcounter.\thecorcounter.}
+\newcommand{\cornumbering}{\thechapter.\thestcounter.\thecorcounter}
 
 %% corollary and axiom require different styles
 \newenvironment{plaincorollary}[2]{%
@@ -424,13 +442,16 @@
 \newenvironment{cor}         [1]{\begin{plaincorollary}{Corollary}{#1}}{\end{plaincorollary}}
 \newenvironment{lemma_inside}[1]{\begin{plaincorollary}{Lemma}{#1}}    {\end{plaincorollary}}
 
+\newcommand{\axbackgroundcolor}{lightgray}
+\newcommand{\axheaderfontcolor}{gunmetal}
+
 \newenvironment{axiom}[1]{%
     \stepcounter{axcounter}
     \vspace{\stpreskip}\vspace{7.7pt}
     \reversemarginpar
-    \marginnote{\color{\stheaderfontcolor}\stheaderfont\raggedright Axiom \theaxcounter.\\ \stsubheaderfont #1}
+    \marginnote{\color{\axheaderfontcolor}\stheaderfont\raggedright Axiom \theaxcounter.\\ \stsubheaderfont #1}
     \vspace{-7.7pt}
-    \begin{mdframed}[backgroundcolor=\stbackgroundcolor,
+    \begin{mdframed}[backgroundcolor=\axbackgroundcolor,
         topline=false,rightline=false,leftline=false,bottomline=false,
         innerleftmargin=5pt, innerrightmargin=5pt]
         \it
@@ -475,7 +496,7 @@
 \begin{mdframed}[backgroundcolor=\stbackgroundcolor,
     topline=false,bottomline=false,rightline=false,leftline=false,
     innertopmargin=5pt,innerleftmargin=5pt,innerrightmargin=5pt,
-    frametitle=#1,frametitlefont=\fontfamily{phv}\selectfont\footnotesize,
+    frametitle=#1,frametitlefont=\itckabelstd\selectfont\footnotesize,
     frametitlebelowskip=0pt]
 }%
 {%
@@ -483,11 +504,14 @@
 }
 
 %% underbrace, overbrace
-\renewcommand{\underbrace}{\underbracket[0.25mm][0.7mm]}
-\renewcommand{\overbrace}{\overbracket[0.25mm][0.7mm]}
+\newcommand{\braceheight}{0.25mm}
+\newcommand{\bracewidth}{0.7mm}
+
+\renewcommand{\underbrace}{\underbracket[\braceheight][\bracewidth]}
+\renewcommand{\overbrace}{\overbracket[\braceheight][\bracewidth]}
 
 %% equation numbering for flalign
-\newcommand{\flnumber}{\stepcounter{equation}\text{[\theequation]}}
+\newcommand{\flnumber}{\stepcounter{equation}\text{\hfill[\theequation]}}
 
 %% vector style
 \renewcommand{\vec}{\mathbf}
@@ -504,7 +528,23 @@
     {%
     \setcounter{equation}{0}
     \stepcounter{parcounter}\vspace{\parpreskip}
-        \reversemarginpar\marginnote{\color{\exheaderfont}\fontfamily{phv}\selectfont QN. \theparcounter\raggedright}
+        \reversemarginpar\marginnote{\color{\exheaderfont}\itckabelstd\selectfont QN. \theparcounter\raggedright}
+        \noindent
+    }
+
+    \renewcommand{\ex}
+    {%
+    \setcounter{equation}{0}
+    \stepcounter{parcounter}\vspace{\parpreskip}
+        \reversemarginpar\marginnote{\color{\exheaderfont}\itckabelstd\selectfont (EX. \theparcounter\raggedright)}
+        \noindent
+    }
+
+    \renewcommand{\np}
+    {%
+    \setcounter{equation}{0}
+    \stepcounter{parcounter}\vspace{\parpreskip}
+        \reversemarginpar\marginnote{\color{\exheaderfont}\itckabelstd\selectfont(\theparcounter\raggedright)}
         \noindent
     }
 
@@ -518,9 +558,9 @@
     \vspace{\defnpreskip}\begin{mdframed}[topline=false,bottomline=false,rightline=false,
         linewidth=4pt, linecolor=\docmaincolor,
         innertopmargin=0pt, innerbottommargin=0pt, innerrightmargin=0pt]
-        {\color{\docmaincolor}\fontfamily{phv}\selectfont\small\textbf{#1} #2} \\
+        {\color{\docmaincolor}\itckabelstd\selectfont\small\textbf{#1} #2} \\
         \reversemarginpar
-        \marginnote{\color{\docmaincolor}\fontfamily{phv}\selectfont\small\textbf{Def'n \thedefncounter.}}
+        \marginnote{\color{\docmaincolor}\itckabelstd\selectfont\small Def'n \thedefncounter}
     }
     {\end{mdframed}}
 }
