@@ -33,7 +33,7 @@
 
 %% function
 \DeclareMathOperator{\codomain}{codomain}
-\DeclareMathOperator{\domain}{domain}
+\DeclareMathOperator{\dom}{dom}
 \DeclareMathOperator{\nul}{null}
 \DeclareMathOperator{\image}{image}
 \let\graph\relax
@@ -66,8 +66,8 @@
 \DeclareMathOperator{\nullity}{nullity}
 \DeclareMathOperator{\rank}{rank}
 
-\DeclareMathOperator{\col}{Col}
-\DeclareMathOperator{\row}{Row}
+\DeclareMathOperator{\col}{col}
+\DeclareMathOperator{\row}{row}
 
 \DeclareMathOperator{\adj}{adj} % adjugate
 \DeclareMathOperator{\tr}{tr}   % trace
@@ -148,6 +148,9 @@
 %% convex line
 \DeclareMathOperator{\co}{Co}
 
+%% line
+\newcommand{\gline}[1]{\overleftrightarrow{#1}}
+
 %% oscillation
 \DeclareMathOperator{\osc}{osc}
 
@@ -159,8 +162,9 @@
 \DeclareMathOperator{\cl}{cl}
 \DeclareMathOperator{\bd}{bd}
 
-%% Jacobian
+%% Jacobian, Hessian
 \DeclareMathOperator{\jac}{J}
+\DeclareMathOperator{\hes}{H}
 
 %% complex elementary functions
 \DeclareMathOperator{\Log}{Log}
@@ -181,6 +185,8 @@
 \DeclareMathOperator{\inv}{inv}
 \DeclareMathOperator{\id}{id}
 
+\DeclareMathOperator{\lgraph}{L}
+
 %% ========================================================
 %% graph theory
 
@@ -193,6 +199,8 @@
 \DeclareMathOperator{\ccone}{char.cone}
 \DeclareMathOperator{\cone}{cone}
 \DeclareMathOperator{\conv}{conv}
+
+\DeclareMathOperator{\epi}{epi}
 
 %% ========================================================
 %% probability and statistics

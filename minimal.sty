@@ -392,6 +392,9 @@
 \newcounter{axcounter}
 \setcounter{axcounter}{0}
 
+\newcounter{algocounter}
+\setcounter{algocounter}{0}
+
 %% statement style macros
 \newcommand{\stbackgroundcolor}{almond}
 \newcommand{\stheaderfontcolor}{taupe}
@@ -422,9 +425,9 @@
 \newenvironment{theorem}    [1]{\begin{plainstatement}{Theorem}    {#1}}{\end{plainstatement}}
 \newenvironment{lemma}      [1]{\begin{plainstatement}{Lemma}      {#1}}{\end{plainstatement}}
 
+%% corollary and axiom require different styles
 \newcommand{\cornumbering}{\thechapter.\thestcounter.\thecorcounter}
 
-%% corollary and axiom require different styles
 \newenvironment{plaincorollary}[2]{%
     \stepcounter{corcounter}
     \vspace{\stpreskip}\vspace{7.7pt}
@@ -458,6 +461,37 @@
 }{%
     \end{mdframed}\vspace{\stpostskip}
 }
+
+%% algorithm
+\newcommand{\algonumbering}{\thechapter.\thealgocounter}
+
+\newcounter{indentdepth}
+\setcounter{indentdepth}{0}
+
+\newcounter{linenumber}
+\setcounter{linenumber}{0}
+
+\newcommand{\FOR}[1]{{\scriptsize\stepcounter{linenumber}\thelinenumber.\ \ }\hspace*{\value{indentdepth}cm}for #1: \newline\stepcounter{indentdepth}}
+\newcommand{\DO}[1] {{\scriptsize\stepcounter{linenumber}\thelinenumber.\ \ }\hspace*{\value{indentdepth}cm}#1;\newline}
+\newcommand{\DONE}  {{\scriptsize\stepcounter{linenumber}\thelinenumber.\ \ }\addtocounter{indentdepth}{-1}\hspace*{\value{indentdepth}cm}done\newline}
+
+\newenvironment{plainalgorithm}[2]{%
+    \setcounter{linenumber}{0}
+    \stepcounter{algocounter}
+    \vspace{\stpreskip}\vspace{7.7pt}
+    \reversemarginpar
+    \marginnote{\color{\stheaderfontcolor}\stheaderfont\raggedright #1 \algonumbering\\ \stsubheaderfont #2}
+    \vspace{-7.7pt}
+    \begin{mdframed}[topline=false,bottomline=false,rightline=false,
+        linewidth=4pt, linecolor=\docmaincolor,
+        innertopmargin=0pt, innerbottommargin=0pt, innerrightmargin=0pt]
+        \ubuntumono\selectfont\footnotesize
+}{%
+        \unpenalty\unskip\unpenalty % to undo \newline
+    \end{mdframed}\vspace{\stpostskip}
+}
+
+\newenvironment{algorithm}[1]{\begin{plainalgorithm}{Algorithm}{#1}}{\end{plainalgorithm}}
 
 %% icon symbols for various fields of mathematics
 
@@ -524,11 +558,11 @@
 
 \DeclareOption{assignment}
 {%
-    \renewcommand{\qn}
+    \renewcommand{\qn}[1][]
     {%
     \setcounter{equation}{0}
     \stepcounter{parcounter}\vspace{\parpreskip}
-        \reversemarginpar\marginnote{\color{\exheaderfont}\itckabelstd\selectfont QN. \theparcounter\raggedright}
+        \reversemarginpar\marginnote{\color{\exheaderfont}\itckabelstd\selectfont QN\ \theparcounter\raggedright\\\scriptsize #1}
         \noindent
     }
 
@@ -536,7 +570,7 @@
     {%
     \setcounter{equation}{0}
     \stepcounter{parcounter}\vspace{\parpreskip}
-        \reversemarginpar\marginnote{\color{\exheaderfont}\itckabelstd\selectfont (EX. \theparcounter\raggedright)}
+        \reversemarginpar\marginnote{\color{\exheaderfont}\itckabelstd\selectfont (EX\ \theparcounter\raggedright)}
         \noindent
     }
 
