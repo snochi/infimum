@@ -1,0 +1,241 @@
+%% =========================================================
+%% package imports
+
+\RequirePackage{calc}
+\RequirePackage{enumitem}
+\RequirePackage{fontawesome}
+\RequirePackage{fontspec}
+\RequirePackage[top=2cm, bottom=2cm, left=1.5cm, right=7.5cm, marginparwidth=6.0cm, marginparsep=0.5cm]{geometry}
+\RequirePackage{mdframed}
+\RequirePackage{marginnote}
+\RequirePackage{tikz}
+
+\RequirePackage[T1]{fontenc}        % this must come after fontspec
+
+%% =========================================================
+%% enumitem
+
+\renewcommand{\labelitemi}{$\cdot$}
+\renewcommand{\labelitemii}{$\cdot$}
+
+%% =========================================================
+%% fontspec and fontenc
+
+\newfontfamily{\serifastd}{Serifa Std}
+\newfontfamily{\ubuntumono}{Ubuntu Mono}
+\newfontfamily{\itckabelstd}{ITC Kabel Std}
+\newfontfamily{\avantgarde}{ITC Avant Garde Gothic Std}
+
+\setmainfont[ItalicFont={Roboto Light Italic},BoldFont={Roboto},BoldItalicFont={Roboto Italic}]{Roboto Light}
+
+\setmonofont{Ubuntu Mono}
+
+%% =========================================================
+%% misc
+
+\thispagestyle{empty}
+
+\DeclareTextFontCommand{\emph}{\bfseries\em}
+
+\newcommand{\kwdbox}[1]{\tikz[overlay]\node[draw,inner sep=2pt,anchor=text,rectangle,rounded corners=1mm]{#1};\phantom{#1}}
+\newcommand{\kwdhskip}{0.1cm}
+\newcommand{\kwdvskip}{0.1cm}
+\newcommand{\kwd}[1]{\vspace{\kwdvskip}\kwdbox{#1}\hspace{\kwdskip}}
+
+\newcommand{\defaultvskip}{0.25cm}
+
+\newcommand{\makename}[1]{\noindent{\scshape\Huge\textbf{#1}}\vspace{\defaultvskip}}
+
+\newcommand{\contectinfohskip}{0.25cm}
+\newcommand{\contectinfoseparator}{\hspace{\contectinfoskip*2}}
+\newcommand{\makecontectinfo}[1]{\noindent{#1}\vspace{\defaultskip*4}}
+
+\newcommand{\makesection}[1]{\noindent{\scshape\Large\textbf{#1}}\vspace{\defaultvskip}}
+
+\newcommand{\newexperience}[3]{\noindent{#1\hfill\textit{#2}}\\\small{#3}}
+
+%% =========================================================
+
+\begin{document}
+
+
+    \noindent{\scshape\Huge\textbf{Yohan Song}}
+
+    \vspace{0.25cm}
+
+    \noindent\texttt{y343song@uwaterloo.ca} \hspace{0.25cm}\hspace{0.25cm}\texttt{+1-778-917-2782}\hspace{0.25cm}\hspace{0.25cm}\texttt{Coquitlam, BC}\hspace{0.25cm}\hspace{0.25cm}\faGithub\ \texttt{github.com/snochi}
+
+    \noindent\faYoutubePlay\ \texttt{https://www.youtube.com/channel/UCpggmd\_WJfG682U9JDyn\_fQ}
+    
+    \vspace{1cm}
+
+    \marginnote{
+        \noindent{\scshape\Large\textbf{Summary}}
+        \vspace{0.25cm}
+        \\Young mathematician with strong foundations in linear algebra and calculus, experiences in optimization, graph theory, numerical analysis and stochastic processes.
+        \\Interested in applying mathematics to develop and analyze efficient optimization algorithms.
+        \\
+        \vspace{0.75cm}
+        \noindent{\scshape\Large\textbf{Strengths}}
+        \\
+        \vspace{0.25cm}
+        \textbf{Theory}
+        \\
+        \vspace{0.1cm}
+        \hspace*{0.2cm}\kwd{Linear Algebra}\ \ \ \ \kwd{Calculus}
+        \\
+        \vspace{0.2cm}
+        \hspace*{0.2cm}\kwd{Graph Theory}\ \ \ \ \kwd{Linear Programming}
+        \\
+        \vspace{0.2cm}
+        \hspace*{0.2cm}\kwd{Numerical Analysis}\ \ \ \ \kwd{Algorithms}
+        \\
+        \vspace{0.2cm}
+        \hspace*{0.2cm}\kwd{Nonlinear Optimization}
+        \\
+        \vspace{0.2cm}
+        \hspace*{0.2cm}\kwd{Stochastic Processes}
+        \\
+        \vspace{0.25cm}
+        \textbf{Programming}
+        \\
+        \vspace{0.1cm}
+        \hspace*{0.2cm}\kwd{Python}\ \ \ \ \kwd{C}\ \ \ \ \kwd{C++}\ \ \ \ \kwd{Racket}
+        \\
+        \vspace{0.25cm}
+        \textbf{Problem Solving}
+        \\
+        \vspace{0.1cm}
+        \hspace*{0.2cm}\kwd{Divide and Conquer}\ \ \ \ \kwd{Generalization}
+        \\
+        \vspace{0.25cm}
+        \textbf{Communication}
+        \\
+        \vspace{0.1cm}
+        \hspace*{0.2cm}\kwd{Formal Writing}\ \ \ \ \kwd{\LaTeX}
+        \\
+        \vspace{0.2cm}
+        \hspace*{0.2cm}\kwd{Visualization with Manim}
+        \\
+        \vspace{0.75cm}
+        \noindent{\scshape\Large\textbf{Languages}}
+        \\
+        \vspace{0.25cm}
+        \hspace*{0.2cm}\kwd{English--fluent}\ \ \ \ \kwd{Korean--native}
+        \\
+        \vspace{0.75cm}
+        \noindent{\scshape\Large\textbf{Awards}}
+        \\
+        \vspace{0.25cm}
+        \textit{President's Enterance Award}\hfill\textit{2019}
+        \\
+        \vspace{0.75cm}
+        \noindent{\scshape\Large\textbf{Interesting Facts}}
+        \\
+        Take notes in \LaTeX, with a custom package called minimal. Both package and notes are available publically in GitHub.
+        \\
+        Sometimes create math related videos, and if some are satisfactory, then they get posted on YouTube.
+    }
+    \noindent{\scshape\Large\textbf{Academic Projects}}
+
+    \vspace{0.25cm}
+
+    \noindent\emph{Fundamental Theorem of Linear Inequalities}\hfill\textit{2021}
+    \\{\small Introduction to Optimization}
+    \begin{itemize}
+        \item Investigated Schrijver's algorithmic approach to the theorem and how it relates to the famous Dantzig's simplex algorithm and its variant Blend's rule.
+        \item Wrote a formal report with a heavy emphesis on algebraic aspect of the investigation.
+            \begin{itemize}
+                \item \texttt{(link)}
+            \end{itemize} 
+        \item Created a short animated explanation of Schrijver's argument in 3-dimensional cases, with an open source Python library manim, focusing on its geometric details.
+            \begin{itemize}
+                \item \texttt{(link)}
+                \item \texttt{(github)}
+            \end{itemize} 
+        \item Wrote an implementation of Schrijver's argument, using numpy.
+            \begin{itemize}
+                \item \texttt{(github)}
+            \end{itemize} 
+    \end{itemize} 
+
+    \vspace{0.25cm}
+
+    \noindent{\emph{Chess}}\hfill\textit{2021}
+    \\{\small Object-oriented Software Development}
+    \begin{itemize}
+        \item Created a text-based playble chess game in C++ as a team project.
+            \begin{itemize}
+                \item \texttt{(github)}
+            \end{itemize} 
+        \item Utilized GitHub to efficiently distribute and merge works.
+        \item Wrote documentations for how the program works.
+            \begin{itemize}
+                \item \texttt{(link)}
+            \end{itemize} 
+        \item Created test files and testing programs to automate the proof of correctness.
+    \end{itemize} 
+
+    \vspace{0.5cm}
+
+    \noindent{\scshape\Large\textbf{Education}}
+    
+    \vspace{0.25cm}
+
+    \noindent\emph{BMath} in \emph{Combinatorics and Optimization}, \emph{Pure Mathematics}\hfill\textit{2021--present}
+    \\{\small University of Waterloo, Waterloo, ON}
+
+    \vspace{0.25cm}
+
+    \noindent\emph{BMath} in \textit{General Mathematics}\hfill\textit{2020--2021}
+    \\{\small University of Waterloo, Waterloo, ON}
+
+    \vspace{0.25cm}
+
+    \noindent\emph{BSc} in \textit{Mathematical Physics}\hfill\textit{2019--2020}
+    \\{\small University of Waterloo, Waterloo, ON}
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+\end{document}

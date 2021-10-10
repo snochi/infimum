@@ -97,6 +97,7 @@
 \newfontfamily{\serifastd}{Serifa Std}
 \newfontfamily{\ubuntumono}{Ubuntu Mono}
 \newfontfamily{\itckabelstd}{ITC Kabel Std}
+\newfontfamily{\itckabelbold}{ITC Kabel Std Bold}
 \newfontfamily{\avantgarde}{ITC Avant Garde Gothic Std}
 
 \setmonofont{Ubuntu Mono}
@@ -116,7 +117,7 @@
 \newcommand{\plainnp}[2]
 {%
 \stepcounter{parcounter}\vspace{\parpreskip}
-    \reversemarginpar\marginnote{\color{\exheaderfont}\itckabelstd\selectfont\small\raggedright (#1\thechapter.\theparcounter)\\\scriptsize#2}
+    \reversemarginpar\marginnote{\color{\exheaderfont}\itckabelstd\selectfont\small\raggedright (#1\thechapter.\theparcounter)\\\tiny#2}
     \noindent
 }
 
@@ -192,7 +193,7 @@
 \newcommand{\chapterstyle}{\serifastd\selectfont\bfseries\Huge}
 \titleformat{\chapter}[display]{\chapterstyle}{\thechapter.}{0pt}{}
 
-\newcommand{\executeforeachchap}{\thispagestyle{empty}\clearpage\setcounter{parcounter}{0}\setcounter{stcounter}{0}\setcounter{defncounter}{0}}
+\newcommand{\executeforeachchap}{\thispagestyle{empty}\clearpage\setcounter{parcounter}{0}\setcounter{stcounter}{0}\setcounter{defncounter}{0}\setcounter{algocounter}{0}}
 \newcommand{\chap}[1]{\savegeometry{defaultgeometry}\newgeometry{margin=2cm}\chapter{#1}\localtoc\executeforeachchap\loadgeometry{defaultgeometry}}
 
 % section
@@ -216,8 +217,12 @@
     \localtocrule 
     \etocsettocstyle{}{}
     \setlength{\cftsecindent}{0pt}\renewcommand{\cftdot}{}\cftpagenumbersoff{section}
-    \renewcommand{\cftsecfont}{\normalfont\sffamily}
-    \renewcommand{\cftsecpagefont}{\normalfont\sffamily}
+    \renewcommand{\cftchapfont}{\itckabelbold}
+    \renewcommand{\cftchappagefont}{\itckabelbold}
+    \renewcommand{\cftsecfont}{\itckabelstd}
+    \renewcommand{\cftsecpagefont}{\itckabelstd}
+%    \renewcommand{\cftsecfont}{\normalfont\sffamily}
+%    \renewcommand{\cftsecpagefont}{\normalfont\sffamily}
     \localtableofcontents
     \vspace{-5pt}\noindent\localtocrule
 }
@@ -225,7 +230,7 @@
 \newcommand{\toc}{
     \savegeometry{defaultgeometry}
     \newgeometry{margin=2cm}
-    \renewcommand{\cfttoctitlefont}{\serifastd\selectfont\Huge\color{\docmaincolor}\textbf}
+    \renewcommand{\cfttoctitlefont}{\serifastd\selectfont\Huge\textbf}
     \cftpagenumbersoff{chapter}
     \pagenumbering{gobble}
     \tableofcontents
@@ -308,6 +313,19 @@
     \global\qedplacedfalse
     \vspace{\proofpreskip}
     \begingroup\noindent\proofheaderfont{#1. }\endgroup
+}{
+    \ifqedplaced %
+    \else
+        \hspace*{\fill}$\qedsym$ % \hspace*{\fill} is used instead of \hfill
+    \fi%                         % becasue \hfill is ignored whenever it is the first element of a line 
+
+    \vspace{\proofpostskip}
+}
+
+\newenvironment{noproof}[1][]{
+    \global\qedplacedfalse
+    \vspace{\proofpreskip}
+    \begingroup\noindent\proofheaderfont{}\endgroup
 }{
     \ifqedplaced %
     \else
@@ -471,9 +489,11 @@
 \newcounter{linenumber}
 \setcounter{linenumber}{0}
 
-\newcommand{\FOR}[1]{{\scriptsize\stepcounter{linenumber}\thelinenumber.\ \ }\hspace*{\value{indentdepth}cm}for #1: \newline\stepcounter{indentdepth}}
-\newcommand{\DO}[1] {{\scriptsize\stepcounter{linenumber}\thelinenumber.\ \ }\hspace*{\value{indentdepth}cm}#1;\newline}
-\newcommand{\DONE}  {{\scriptsize\stepcounter{linenumber}\thelinenumber.\ \ }\addtocounter{indentdepth}{-1}\hspace*{\value{indentdepth}cm}done\newline}
+\newcommand{\IF}[1]   {{\scriptsize\stepcounter{linenumber}\thelinenumber.\ \ }\hspace*{\value{indentdepth}cm}if #1: \newline\stepcounter{indentdepth}}
+\newcommand{\WHILE}[1]{{\scriptsize\stepcounter{linenumber}\thelinenumber.\ \ }\hspace*{\value{indentdepth}cm}while #1: \newline\stepcounter{indentdepth}}
+\newcommand{\FOR}[1]  {{\scriptsize\stepcounter{linenumber}\thelinenumber.\ \ }\hspace*{\value{indentdepth}cm}for #1: \newline\stepcounter{indentdepth}}
+\newcommand{\DO}[1]   {{\scriptsize\stepcounter{linenumber}\thelinenumber.\ \ }\hspace*{\value{indentdepth}cm}#1;\newline}
+\newcommand{\DONE}    {{\scriptsize\stepcounter{linenumber}\thelinenumber.\ \ }\addtocounter{indentdepth}{-1}\hspace*{\value{indentdepth}cm}done\newline}
 
 \newenvironment{plainalgorithm}[2]{%
     \setcounter{linenumber}{0}
