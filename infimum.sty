@@ -1,0 +1,310 @@
+%% =========================================================
+%% package imports
+
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{booktabs}
+\RequirePackage{calc}
+\RequirePackage{caption}
+\RequirePackage{enumitem}
+\RequirePackage{etoolbox} % \undef
+\RequirePackage{fancyhdr}
+\RequirePackage{float}
+\RequirePackage[no-math]{fontspec}
+\RequirePackage[top=2cm,bottom=2cm,left=1cm,right=1cm]{geometry}
+\RequirePackage{graphicx}
+\RequirePackage[bookmarks]{hyperref} % indices
+\RequirePackage{mathtools}
+\RequirePackage{subfiles}
+\RequirePackage{tabularx}
+\RequirePackage{titlesec}
+\RequirePackage[table]{xcolor}
+
+\RequirePackage{solmathsym}
+\RequirePackage{solphyssym}
+
+\RequirePackage{mathspec}
+\RequirePackage[T1]{fontenc}
+\RequirePackage{MnSymbol}
+\RequirePackage{tikz}
+
+%% =========================================================
+%% global parameters
+
+\newcommand{\docrulelength}{3cm}
+\newcommand{\preskip}{11pt}
+
+%% =========================================================
+%% caption
+
+\DeclareCaptionFont{itckabelstd}{\itckabelstd}
+\captionsetup{font={itckabelstd,footnotesize}}
+
+%% =========================================================
+%% enumitem
+
+\setlist{itemsep=0pt,topsep=3pt}
+
+%% itemize
+\renewcommand{\labelitemi}{$\circ$}
+\renewcommand{\labelitemii}{$\cdot$}
+
+%% enumerate
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\renewcommand{\theenumi}{\labelenumi}
+\renewcommand{\labelenumii}{(\roman{enumii})}
+\renewcommand{\theenumii}{\labelenumii}
+\renewcommand{\labelenumiii}{(\arabic{enumiii})}
+\renewcommand{\theenumiii}{\labelenumii}
+
+%% =========================================================
+%% fancyhdr
+
+\pagestyle{fancy}
+\fancyfoot[C]{\itckabelstd\thepage}
+\fancyhead{}
+
+%% remove headrule
+\renewcommand{\headrulewidth}{0pt}
+
+%% =========================================================
+%% fontenc, fontspec, mathspec
+
+\newfontfamily{\itckabelstd}{ITC Kabel Std}
+\newfontfamily{\ubuntumono}{Ubuntu Mono}
+\newfontfamily{\ubuntumonoitalic}{Ubuntu Mono Italic}
+
+\setmainfont[ItalicFont={Minion Pro Italic},BoldFont={Minion Pro Bold},BoldItalicFont={Minion Pro Bold Italic}]{Minion Pro}
+\setmathsfont(Digits,Greek,Latin)[Numbers={Proportional}]{Minion Pro}
+\setmathrm{Minion Pro}
+
+%% =========================================================
+%% tabularx
+
+%% new column types for tables
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+
+%% =========================================================
+%% titlesec
+
+\newcommand{\resetcounters}{\setcounter{stcounter}{0}\setcounter{corcounter}{0}\setcounter{defncounter}{0}\setcounter{excounter}{0}\setcounter{algocounter}{0}\setcounter{equation}{0}}
+
+\titleformat{\section}{\clearpage\itckabelstd\Large\centering\bfseries}{\MakeUppercase{\romannumeral\thesection}. }{0pt}{\resetcounters}
+\titleformat{\subsection}{\itckabelstd\centering}{\thesubsection. }{0pt}{}
+
+\renewcommand*{\thesubsection}{\arabic{subsection}}
+
+%% =========================================================
+%% misc
+
+%% augmented matrix
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+%% maximum number of matrix columns
+\setcounter{MaxMatrixCols}{20}
+
+%% equation numbering
+\newtagform{brackets}{[}{]}
+\usetagform{brackets}
+\renewcommand{\theequation}{\thesection.\arabic{equation}}
+
+%% \emph{}
+\DeclareTextFontCommand{\emph}{\bfseries\em}
+
+%% rules
+\newcommand*\ruleline     [1]{\par\noindent\raisebox{0.8ex}{\makebox[\linewidth]{\hrulefill\hspace{1ex}\raisebox{-0.8ex}{#1}\hspace{1ex}\hrulefill}}}
+\newcommand*\rightruleline[1]{\par\noindent\raisebox{0.8ex}{\makebox[\linewidth]{\raisebox{-0.8ex}{#1}\hspace{1ex}\hrulefill}}}
+\newcommand*\leftruleline [1]{\par\noindent\raisebox{0.8ex}{\makebox[\linewidth]{\hrulefill\hspace{1ex}\raisebox{-0.8ex}{#1}}}}
+\newcommand*\rruleline       {\par\noindent\raisebox{0.8ex}{\makebox[\linewidth]{\hrulefill}}\vspace{-\preskip}}
+
+%% boxy
+\newenvironment{boxy}[1]{%
+\vspace{\preskip}
+\rightruleline{#1}
+}{\rruleline}
+
+\newenvironment{boxyproof}[1]{%
+\vspace{\preskip}
+\rightruleline{\pffont#1}
+}{\placeqed}
+
+%% footnote settings
+\renewcommand{\thempfootnote}{\arabic{mpfootnote}}
+
+%% new paragraph
+\newcommand{\np}{\vspace{\preskip}}
+
+%% underbrace, overbrace
+\newcommand{\braceheight}{0.25mm}
+\newcommand{\bracewidth}{0.7mm}
+
+\renewcommand{\underbrace}{\underbracket[\braceheight][\bracewidth]}
+\renewcommand{\overbrace}{\overbracket[\braceheight][\bracewidth]}
+
+%% definition-like environments
+\newcounter{defncounter}
+\setcounter{defncounter}{0}
+
+\newcommand{\defnnumbering}{\stepcounter{defncounter}\thesection.\thedefncounter. }
+\newcommand{\defnfont}{\itckabelstd\small}
+
+\newenvironment{defn}[2]
+{
+\vspace{\preskip}
+\noindent{\defnfont#1#2}%
+\newline\noindent
+}
+{}
+
+\newenvironment{definition}[1]{\begin{defn}{Def'n \defnnumbering}   {#1}}{\end{defn}}
+\newenvironment{notation}  [1]{\begin{defn}{Notation \defnnumbering}{#1}}{\end{defn}}
+\newenvironment{recall}    [1]{\begin{defn}{Recall \defnnumbering}  {#1}}{\end{defn}}
+
+%% statement-like environments
+\newcounter{stcounter}
+\setcounter{stcounter}{0}
+
+\newcounter{axcounter}
+\setcounter{axcounter}{0}
+
+\newcounter{corcounter}
+\setcounter{corcounter}{0}
+
+\newcounter{excounter}
+\setcounter{excounter}{0}
+
+\newcommand{\stfont}{\itckabelstd\small\bfseries}
+\newcommand{\stsubfont}{\itckabelstd\small}
+
+\newcommand{\stnumbering}{\setcounter{corcounter}{0}\stepcounter{stcounter}\thesection.\thestcounter. }
+\newcommand{\cornumbering}{\stepcounter{corcounter}\thesection.\thestcounter.\thecorcounter. }
+\newcommand{\exnumbering}{\stepcounter{excounter}\thesection.\theexcounter. }
+
+\newcommand{\axnumbering}{\stepcounter{axcounter}\theaxcounter. }
+
+\newenvironment{st}[2]
+{
+\vspace{\preskip}
+\noindent{\rightruleline{{\stfont#1}{\stsubfont#2}}}%
+\newline\noindent
+}
+{}
+
+\newenvironment{prop}         [1]{\begin{st}{Proposition \stnumbering}{#1}}{\end{st}}
+\newenvironment{theorem}      [1]{\begin{st}{Theorem \stnumbering}    {#1}}{\end{st}}
+\newenvironment{lemma}        [1]{\begin{st}{Lemma \stnumbering}      {#1}}{\end{st}}
+\newenvironment{fact}         [1]{\begin{st}{Fact \stnumbering}       {#1}}{\end{st}\rruleline}
+
+\newenvironment{axiom}        [1]{\begin{st}{Axiom \axnumbering}      {#1}}{\end{st}\rruleline}
+\newenvironment{postulate}    [1]{\begin{st}{Postulate \axnumbering}  {#1}}{\end{st}\rruleline}
+
+\newenvironment{lemma_inside} [1]{\begin{st}{Lemma \cornumbering}     {#1}}{\end{st}}
+\newenvironment{cor}          [1]{\begin{st}{Corollary \cornumbering} {#1}}{\end{st}}
+
+\newenvironment{example}      [1]{\begin{st}{Example \exnumbering}    {#1}}{\end{st}}
+\newenvironment{exercise}     [1]{\begin{st}{Exercise \exnumbering}   {#1}}{\end{st}}
+\newenvironment{question}   [1][]{\begin{st}{Question \exnumbering}   {#1}}{\end{st}}
+
+%% algorithm
+\newcounter{indentdepth}
+\setcounter{indentdepth}{0}
+
+\newcounter{linenumber}
+\setcounter{linenumber}{0}
+
+\newcounter{algocounter}
+\setcounter{algocounter}{0}
+
+\newcommand{\algonumbering}{\setcounter{indentdepth}{0}\setcounter{linenumber}{0}\stepcounter{algocounter}\thesection.\thealgocounter. }
+
+\newcommand{\linenumbering}{\stepcounter{linenumber}\ifnum\thelinenumber<10 0\fi\number\thelinenumber.\ \ }
+
+\newcommand{\IF}[1]     {{\scriptsize\linenumbering}\hspace*{\value{indentdepth}cm}if #1: \newline\stepcounter{indentdepth}}
+\newcommand{\ELIF}[1]   {{\scriptsize\linenumbering}\hspace*{\value{indentdepth}cm}elif #1: \newline\stepcounter{indentdepth}}
+\newcommand{\ELSE}      {{\scriptsize\linenumbering}\hspace*{\value{indentdepth}cm}else: \newline\stepcounter{indentdepth}}
+\newcommand{\WHILE}[1]  {{\scriptsize\linenumbering}\hspace*{\value{indentdepth}cm}while #1: \newline\stepcounter{indentdepth}}
+\newcommand{\FOR}[1]    {{\scriptsize\linenumbering}\hspace*{\value{indentdepth}cm}for #1: \newline\stepcounter{indentdepth}}
+\newcommand{\DO}[1]     {{\scriptsize\linenumbering}\hspace*{\value{indentdepth}cm}#1\newline}
+\newcommand{\INPUT}[1]  {{\scriptsize INPUT:\ \ }                                \hspace*{\value{indentdepth}cm}#1\newline}
+\newcommand{\COMMENT}[1]{{\scriptsize\linenumbering}\hspace*{\value{indentdepth}cm}{\ubuntumonoitalic\selectfont// #1}\newline}
+
+\newcommand{\DONE}      {\addtocounter{indentdepth}{-1}}
+
+\newenvironment{algorithm}[1]
+{
+\vspace{\preskip}
+\noindent{\rightruleline{{\stfont Algorithm \algonumbering}{\stsubfont#1}}}%
+\ubuntumono\footnotesize\noindent
+}{%
+\unpenalty\unskip\unpenalty % to undo \newline
+\rruleline
+}
+
+%% analysis
+\newenvironment{analysis}[1]
+{
+\vspace{\preskip}
+\noindent{\rightruleline{{\stfont Analysis }{\stsubfont of }{\stfont#1}}}%
+}{\rruleline}
+
+%% proof-like environments
+\newcommand{\pffont}{\itckabelstd\small\bfseries}
+\newcommand{\subpffont}{\itckabelstd\small}
+\newif\ifqedplaced
+
+\newcommand{\qedfont}   {\itckabelstd\small\bfseries}
+\newcommand{\subqedfont}{\itckabelstd\small}
+\newcommand{\qedsym}    {QED}
+\newcommand{\subqedsym} {!!!}
+
+\newcommand{\placeqed}[1][\qedsym]      {\global\qedplacedtrue\leftruleline{\qedfont#1}\vspace{-\preskip}}
+\newcommand{\placesubqed}[1][\subqedsym]{\global\qedplacedtrue\hspace*{\fill}{\subqedfont#1}\vspace{-\preskip}}
+
+\newenvironment{pf}[2]
+{
+\global\qedplacedfalse
+\def\temparg{#2}  % can't use #2 in the ending code so use a temporary variable
+\vspace{\preskip}
+\noindent{#1}%
+}
+{
+\ifqedplaced%
+\else\temparg%
+\fi
+}
+
+\newenvironment{proof}[1][Proof]   {\begin{pf}{\pffont #1. }    {\placeqed}}{\end{pf}}
+\newenvironment{answer}            {\begin{pf}{\pffont Answer. }{\placeqed}}{\end{pf}}
+\newenvironment{subproof}[1][Proof]{\vspace{-\preskip}\begin{pf}{\subpffont #1. } {}}         {\end{pf}}
+
+%% =========================================================
+%% options
+
+\DeclareOption{assignment}
+{%
+    \renewcommand{\exnumbering}{\setcounter{equation}{0}\stepcounter{excounter}\theexcounter. }
+    \renewcommand{\stnumbering}{\setcounter{corcounter}{0}\stepcounter{stcounter}\thestcounter. }
+    \renewcommand{\cornumbering}{\stepcounter{corcounter}\thestcounter.\thecorcounter. }
+    \renewcommand{\algonumbering}{\setcounter{indentdepth}{0}\setcounter{linenumber}{0}\stepcounter{algocounter}\thealgocounter. }
+    \renewcommand{\defnnumbering}{\stepcounter{defncounter}\thedefncounter. }
+    \renewcommand{\theequation}{\theexcounter.\arabic{equation}}
+}
+
+\DeclareOption{short}
+{%
+    \renewcommand{\exnumbering}{\setcounter{equation}{0}\stepcounter{excounter}\theexcounter. }
+    \renewcommand{\stnumbering}{\setcounter{corcounter}{0}\stepcounter{stcounter}\thestcounter. }
+    \renewcommand{\cornumbering}{\stepcounter{corcounter}\thestcounter.\thecorcounter. }
+    \renewcommand{\algonumbering}{\setcounter{indentdepth}{0}\setcounter{linenumber}{0}\stepcounter{algocounter}\thealgocounter. }
+    \renewcommand{\defnnumbering}{\stepcounter{defncounter}\thedefncounter. }
+    \renewcommand{\theequation}{\thestcounter.\arabic{equation}}
+}
+
+\ProcessOptions\relax
+
+%% =========================================================

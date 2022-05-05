@@ -17,8 +17,8 @@
 \RequirePackage{mathtools}
 \RequirePackage{mdframed}
 \RequirePackage{solmathsym}
-\RequirePackage{soul}               % for highlighting a text
 \RequirePackage{solphyssym}
+\RequirePackage{soul}               % for highlighting a text
 %\RequirePackage{stmaryrd}           % \llbracket, \rrbracket
 \RequirePackage{tabularx}
 \RequirePackage{tikz}
@@ -97,6 +97,7 @@
 
 \newfontfamily{\serifastd}{Serifa Std}
 \newfontfamily{\ubuntumono}{Ubuntu Mono}
+\newfontfamily{\ubuntumonoitalic}{Ubuntu Mono Italic}
 \newfontfamily{\itckabelstd}{ITC Kabel Std}
 \newfontfamily{\itckabelbold}{ITC Kabel Std Bold}
 \newfontfamily{\avantgarde}{ITC Avant Garde Gothic Std}
@@ -303,7 +304,8 @@
 
 %% proof style macros
 \newcommand{\proofheaderfont}{\color{\docmaincolor}\itckabelstd\selectfont\small\textbf}
-\newcommand{\qedsym}{\textcolor{\docmaincolor}{\rule{0.75ex}{1.5ex}}}
+%\newcommand{\qedsym}{\textcolor{\docmaincolor}{\rule{0.75ex}{1.5ex}}}
+\newcommand{\qedsym}{\textcolor{\docmaincolor}{\blacklozenge}}
 \newcommand{\subqedsym}{\textcolor{\docmaincolor}\triangleleft}
 \newcommand{\proofpreskip}{5pt}
 \newcommand{\proofpostskip}{10pt}
@@ -443,6 +445,7 @@
 \newenvironment{statement}  [1]{\begin{plainstatement}{Statement}  {#1}}{\end{plainstatement}}
 \newenvironment{theorem}    [1]{\begin{plainstatement}{Theorem}    {#1}}{\end{plainstatement}}
 \newenvironment{lemma}      [1]{\begin{plainstatement}{Lemma}      {#1}}{\end{plainstatement}}
+\newenvironment{fact}       [1]{\begin{plainstatement}{Fact}       {#1}}{\end{plainstatement}}
 
 %% corollary and axiom require different styles
 \newcommand{\cornumbering}{\thechapter.\thestcounter.\thecorcounter}
@@ -490,11 +493,12 @@
 \newcounter{linenumber}
 \setcounter{linenumber}{0}
 
-\newcommand{\IF}[1]   {{\scriptsize\stepcounter{linenumber}\thelinenumber.\ \ }\hspace*{\value{indentdepth}cm}if #1: \newline\stepcounter{indentdepth}}
-\newcommand{\WHILE}[1]{{\scriptsize\stepcounter{linenumber}\thelinenumber.\ \ }\hspace*{\value{indentdepth}cm}while #1: \newline\stepcounter{indentdepth}}
-\newcommand{\FOR}[1]  {{\scriptsize\stepcounter{linenumber}\thelinenumber.\ \ }\hspace*{\value{indentdepth}cm}for #1: \newline\stepcounter{indentdepth}}
-\newcommand{\DO}[1]   {{\scriptsize\stepcounter{linenumber}\thelinenumber.\ \ }\hspace*{\value{indentdepth}cm}#1;\newline}
-\newcommand{\DONE}    {{\scriptsize\stepcounter{linenumber}\thelinenumber.\ \ }\addtocounter{indentdepth}{-1}\hspace*{\value{indentdepth}cm}done\newline}
+\newcommand{\IF}[1]     {{\scriptsize\stepcounter{linenumber}\thelinenumber.\ \ }\hspace*{\value{indentdepth}cm}if #1: \newline\stepcounter{indentdepth}}
+\newcommand{\WHILE}[1]  {{\scriptsize\stepcounter{linenumber}\thelinenumber.\ \ }\hspace*{\value{indentdepth}cm}while #1: \newline\stepcounter{indentdepth}}
+\newcommand{\FOR}[1]    {{\scriptsize\stepcounter{linenumber}\thelinenumber.\ \ }\hspace*{\value{indentdepth}cm}for #1: \newline\stepcounter{indentdepth}}
+\newcommand{\DO}[1]     {{\scriptsize\stepcounter{linenumber}\thelinenumber.\ \ }\hspace*{\value{indentdepth}cm}#1;\newline}
+\newcommand{\COMMENT}[1]{{\scriptsize\stepcounter{linenumber}\thelinenumber.\ \ }\hspace*{\value{indentdepth}cm}{\ubuntumonoitalic\selectfont// #1}\newline}
+\newcommand{\DONE}      {{\scriptsize\stepcounter{linenumber}\thelinenumber.\ \ }\addtocounter{indentdepth}{-1}\hspace*{\value{indentdepth}cm}done\newline}
 
 \newenvironment{plainalgorithm}[2]{%
     \setcounter{linenumber}{0}
@@ -583,7 +587,7 @@
     {%
     \setcounter{equation}{0}
     \stepcounter{parcounter}\vspace{\parpreskip}
-        \reversemarginpar\marginnote{\color{\exheaderfont}\itckabelstd\selectfont QN\ \theparcounter\raggedright\\\scriptsize #1}
+        \reversemarginpar\marginnote{\color{\exheaderfont}\itckabelstd\selectfont Q\ \theparcounter\raggedright\\\scriptsize #1}
         \noindent
     }
 

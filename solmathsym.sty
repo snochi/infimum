@@ -3,17 +3,51 @@
 
 
 %% ========================================================
-%% algebraic structures
+%% mathbb fonts
 
+\DeclareMathOperator{\CC}{\mathbb{C}} % to avoid collision with hyperref
+\DeclareMathOperator{\EE}{\mathbb{E}}
+\DeclareMathOperator{\F}{\mathbb{F}}
+\DeclareMathOperator{\HH}{\mathbb{H}}
+\DeclareMathOperator{\I}{\mathbb{I}}
+\DeclareMathOperator{\J}{\mathbb{J}}
+\DeclareMathOperator{\K}{\mathbb{K}}
 \DeclareMathOperator{\N}{\mathbb{N}}
-\DeclareMathOperator{\Z}{\mathbb{Z}}
+\DeclareMathOperator{\PP}{\mathbb{P}}
 \DeclareMathOperator{\Q}{\mathbb{Q}}
 \DeclareMathOperator{\R}{\mathbb{R}}
-\DeclareMathOperator{\CC}{\mathbb{C}} % to avoid collision with hyperref
-\DeclareMathOperator{\F}{\mathbb{F}}
-\DeclareMathOperator{\K}{\mathbb{K}}
-\DeclareMathOperator{\lin}{\mathcal{L}}
-\DeclareMathOperator{\alg}{\mathcal{A}}
+\DeclareMathOperator{\T}{\mathbb{T}}
+\DeclareMathOperator{\Z}{\mathbb{Z}}
+
+%% ========================================================
+%% mathfrak fonts
+
+\DeclareMathOperator{\mfA}{\mathfrak{A}}
+\DeclareMathOperator{\mfB}{\mathfrak{B}}
+\DeclareMathOperator{\mfC}{\mathfrak{C}}
+\DeclareMathOperator{\mfD}{\mathfrak{D}}
+\DeclareMathOperator{\mfE}{\mathfrak{E}}
+\DeclareMathOperator{\mfF}{\mathfrak{F}}
+\DeclareMathOperator{\mfG}{\mathfrak{G}}
+\DeclareMathOperator{\mfH}{\mathfrak{H}}
+\DeclareMathOperator{\mfI}{\mathfrak{I}}
+\DeclareMathOperator{\mfJ}{\mathfrak{J}}
+\DeclareMathOperator{\mfK}{\mathfrak{K}}
+\DeclareMathOperator{\mfL}{\mathfrak{L}}
+\DeclareMathOperator{\mfM}{\mathfrak{M}}
+\DeclareMathOperator{\mfN}{\mathfrak{N}}
+\DeclareMathOperator{\mfO}{\mathfrak{O}}
+\DeclareMathOperator{\mfP}{\mathfrak{P}}
+\DeclareMathOperator{\mfQ}{\mathfrak{Q}}
+\DeclareMathOperator{\mfR}{\mathfrak{R}}
+\DeclareMathOperator{\mfS}{\mathfrak{S}}
+\DeclareMathOperator{\mfT}{\mathfrak{T}}
+\DeclareMathOperator{\mfU}{\mathfrak{U}}
+\DeclareMathOperator{\mfV}{\mathfrak{V}}
+\DeclareMathOperator{\mfW}{\mathfrak{W}}
+\DeclareMathOperator{\mfX}{\mathfrak{X}}
+\DeclareMathOperator{\mfY}{\mathfrak{Y}}
+\DeclareMathOperator{\mfZ}{\mathfrak{Z}}
 
 %% ========================================================
 %% logical symbols
@@ -59,6 +93,8 @@
 \DeclareMathOperator{\ev}{ev}                     % evaluation map
 \DeclareMathOperator{\lcm}{lcm}                   % least common multiple
 
+\DeclareMathOperator{\gf}{GF}                     % Galois field
+
 %% ========================================================
 %% linear algebra
 
@@ -71,6 +107,8 @@
 
 \DeclareMathOperator{\adj}{adj} % adjugate
 \DeclareMathOperator{\tr}{tr}   % trace
+
+\DeclareMathOperator{\diag}{diag}
 
 %% ========================================================
 %% complex numbers
@@ -136,8 +174,9 @@
 \DeclareMathOperator{\pz}{\,\partial\text{z}}
 
 %% gradient
-\DeclareMathOperator{\del}{\nabla}
-\DeclareMathOperator{\grad}{\nabla}
+%% reduce the spacing after \nabla by \!
+\DeclareMathOperator{\del}{\nabla\!}
+\DeclareMathOperator{\grad}{\nabla\!} 
 
 %% diameter of a set
 \DeclareMathOperator{\diam}{diam}
@@ -161,6 +200,9 @@
 \DeclareMathOperator{\intr}{int}
 \DeclareMathOperator{\cl}{cl}
 \DeclareMathOperator{\bd}{bd}
+
+%% exterior
+\DeclareMathOperator{\ext}{ext}
 
 %% Jacobian, Hessian
 \DeclareMathOperator{\jac}{J}
@@ -187,10 +229,13 @@
 
 \DeclareMathOperator{\lgraph}{L}
 
+\DeclareMathOperator{\sgn}{sgn}
+
 %% ========================================================
 %% graph theory
 
 \DeclareMathOperator{\rad}{rad}
+\DeclareMathOperator{\defi}{def}
 
 %% ========================================================
 %% geometry
@@ -205,9 +250,6 @@
 %% ========================================================
 %% probability and statistics
 
-\DeclareMathOperator{\PP}{\mathbb{P}} % probability measure
-
-\DeclareMathOperator{\EE}{\mathbb{E}} % expectation
 \DeclareMathOperator{\var}{var}
 \DeclareMathOperator{\sd}{sd}
 \DeclareMathOperator{\cov}{cov}
@@ -282,9 +324,9 @@
 \DeclareMathOperator{\size}{size}
 
 \DeclareMathOperator*{\argmax}{argmax}
+\DeclareMathOperator*{\argmin}{argmin}
 
 %% multiset
-
 \newcommand{\mch}[2]{
 \left.\mathchoice
   {\left(\kern-0.48em\binom{#1}{#2}\kern-0.48em\right)}
@@ -297,7 +339,6 @@
 \DeclareMathOperator{\B}{\mathbb{B}}
 
 %% leftrightarrow
-
 \newcommand{\lra}{\,\leftrightarrow\,}
 \newcommand{\nlra}{\,\mkern2.1mu\not\mkern-2.1mu\leftrightarrow\,}
 
