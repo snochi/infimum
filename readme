@@ -1,3 +1,9 @@
-minimal is a LaTeX package which is best suited for taking math notes. The overall style of this package is inspired by Contemporary Abstract Algebra by Gallian, Joseph. 
+"infimum" is a LaTeX package which is best suited for taking math notes.
 
-To use this package, one has to download minimal.sty, solmathsym.sty and solphyssym.sty, and save them at ~/texmf/tex/latex/commonstuff/. 
+As its name suggests, infimum has minimalistic design that nevertheless produces the most clean notes.
+
+To use infimum:
+  1) download infimum.sty, solmathsym.sty and solphyssym.sty, and save them at ~/texmf/tex/latex/commonstuff/ ; and
+  2) download few fonts, such as ITC Kabel Std, listed in infimum.sty.
+  
+Package "minimal" is a previous version of "infimum"; it is no longer in use.
