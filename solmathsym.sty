@@ -5,7 +5,9 @@
 %% ========================================================
 %% mathbb fonts
 
+\DeclareMathOperator{\A}{\mathbb{A}} 
 \DeclareMathOperator{\CC}{\mathbb{C}} % to avoid collision with hyperref
+\DeclareMathOperator{\D}{\mathbb{D}} 
 \DeclareMathOperator{\EE}{\mathbb{E}}
 \DeclareMathOperator{\F}{\mathbb{F}}
 \DeclareMathOperator{\HH}{\mathbb{H}}
@@ -65,6 +67,22 @@
 \DeclareMathOperator{\insec}{\bigcap}
 \DeclareMathOperator{\power}{\mathcal{P}}
 
+% disjoint union
+\makeatletter
+\def\moverlay{\mathpalette\mov@rlay}
+\def\mov@rlay#1#2{\leavevmode\vtop{%
+   \baselineskip\z@skip \lineskiplimit-\maxdimen
+   \ialign{\hfil$\m@th#1##$\hfil\cr#2\crcr}}}
+\newcommand{\charfusion}[3][\mathord]{
+    #1{\ifx#1\mathop\vphantom{#2}\fi
+        \mathpalette\mov@rlay{#2\cr#3}
+      }
+    \ifx#1\mathop\expandafter\displaylimits\fi}
+\makeatother
+
+\newcommand{\cupdot}{\charfusion[\mathbin]{\cup}{\cdot}}
+\newcommand{\bigcupdot}{\charfusion[\mathop]{\bigcup}{\cdot}}
+
 %% function
 \DeclareMathOperator{\codomain}{codomain}
 \DeclareMathOperator{\dom}{dom}
@@ -94,6 +112,7 @@
 \DeclareMathOperator{\lcm}{lcm}                   % least common multiple
 
 \DeclareMathOperator{\gf}{GF}                     % Galois field
+
 
 %% ========================================================
 %% linear algebra
@@ -184,8 +203,8 @@
 %% volume of a rectangle
 \DeclareMathOperator{\vol}{vol}
 
-%% convex line
-\DeclareMathOperator{\co}{Co}
+%% convex hull
+\DeclareMathOperator{\co}{co}
 
 %% line
 \newcommand{\gline}[1]{\overleftrightarrow{#1}}
@@ -217,6 +236,22 @@
 %% residue
 \DeclareMathOperator{\res}{res}
 
+%% dist
+\DeclareMathOperator{\dist}{dist}
+
+%% ========================================================
+%% measure theory
+
+%% Bor
+\DeclareMathOperator{\Bor}{Bor}
+
+% set of integrable functions
+\DeclareMathOperator{\Lplus}{L^{+}}
+\DeclareMathOperator{\lplus}{l^{+}}
+
+% set of integrable functions
+\DeclareMathOperator{\Lone}{L^{1}}
+
 %% ========================================================
 %% combinatorics
 
@@ -230,6 +265,8 @@
 \DeclareMathOperator{\lgraph}{L}
 
 \DeclareMathOperator{\sgn}{sgn}
+
+\DeclareMathOperator{\initial}{in}
 
 %% ========================================================
 %% graph theory

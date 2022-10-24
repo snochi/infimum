@@ -25,7 +25,7 @@
 
 \RequirePackage{mathspec}
 \RequirePackage[T1]{fontenc}
-\RequirePackage{MnSymbol}
+%\RequirePackage{MnSymbol}
 \RequirePackage{tikz}
 
 %% =========================================================
@@ -74,7 +74,7 @@
 \newfontfamily{\ubuntumono}{Ubuntu Mono}
 \newfontfamily{\ubuntumonoitalic}{Ubuntu Mono Italic}
 
-\setmainfont[ItalicFont={Minion Pro Italic},BoldFont={Minion Pro Bold},BoldItalicFont={Minion Pro Bold Italic}]{Minion Pro}
+\setmainfont[Mapping=tex-text]{Minion Pro}
 \setmathsfont(Digits,Greek,Latin)[Numbers={Proportional}]{Minion Pro}
 \setmathrm{Minion Pro}
 
@@ -106,7 +106,7 @@
 \makeatother
 
 %% maximum number of matrix columns
-\setcounter{MaxMatrixCols}{20}
+\setcounter{MaxMatrixCols}{30}
 
 %% equation numbering
 \newtagform{brackets}{[}{]}
@@ -203,6 +203,7 @@
 
 \newenvironment{axiom}        [1]{\begin{st}{Axiom \axnumbering}      {#1}}{\end{st}\rruleline}
 \newenvironment{postulate}    [1]{\begin{st}{Postulate \axnumbering}  {#1}}{\end{st}\rruleline}
+\newenvironment{assumption}   [1]{\begin{st}{Assumption \axnumbering} {#1}}{\end{st}\rruleline}
 
 \newenvironment{lemma_inside} [1]{\begin{st}{Lemma \cornumbering}     {#1}}{\end{st}}
 \newenvironment{cor}          [1]{\begin{st}{Corollary \cornumbering} {#1}}{\end{st}}
@@ -272,6 +273,8 @@
 \def\temparg{#2}  % can't use #2 in the ending code so use a temporary variable
 \vspace{\preskip}
 \noindent{#1}%
+\setcounter{claimcounter}{0}
+\setcounter{casecounter}{0}
 }
 {
 \ifqedplaced%
@@ -279,9 +282,30 @@
 \fi
 }
 
-\newenvironment{proof}[1][Proof]   {\begin{pf}{\pffont #1. }    {\placeqed}}{\end{pf}}
-\newenvironment{answer}            {\begin{pf}{\pffont Answer. }{\placeqed}}{\end{pf}}
+\newenvironment{proof}[1][Proof]   {\begin{pf}                  {\pffont #1. }    {\placeqed}}{\end{pf}}
+\newenvironment{answer}            {\begin{pf}                  {\pffont Answer. }{\placeqed}}{\end{pf}}
 \newenvironment{subproof}[1][Proof]{\vspace{-\preskip}\begin{pf}{\subpffont #1. } {}}         {\end{pf}}
+
+%% claim
+\newcounter{claimcounter}
+\setcounter{claimcounter}{0}
+
+\newenvironment{claim}
+{\stepcounter{claimcounter}\vspace{\preskip}\noindent{\subpffont Claim \theclaimcounter.}}
+{\\\hspace*{\fill}\textit{(End of Claim \theclaimcounter)}}
+
+%% case
+\newcounter{casecounter}
+\setcounter{casecounter}{0}
+
+\newenvironment{case}
+{\stepcounter{casecounter}\vspace{\preskip}\noindent{\subpffont Case \thecasecounter.}}
+{\\\hspace*{\fill}\textit{(End of Case \thecasecounter)}}
+
+%% footnote superscript size
+\makeatletter
+\renewcommand{\@makefnmark}{\hbox{\textsuperscript{\tiny{\@thefnmark}}}}
+\makeatother
 
 %% =========================================================
 %% options
