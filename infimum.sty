@@ -15,6 +15,7 @@
 \RequirePackage{graphicx}
 \RequirePackage[bookmarks]{hyperref} % indices
 \RequirePackage{mathtools}
+\RequirePackage{mdframed}
 \RequirePackage{subfiles}
 \RequirePackage{tabularx}
 \RequirePackage{titlesec}
@@ -27,6 +28,9 @@
 \RequirePackage[T1]{fontenc}
 %\RequirePackage{MnSymbol}
 \RequirePackage{tikz}
+\usetikzlibrary{positioning}
+
+\RequirePackage{pgfplots}
 
 %% =========================================================
 %% global parameters
@@ -79,6 +83,48 @@
 \setmathrm{Minion Pro}
 
 %% =========================================================
+%% mdframed
+
+\newcounter{sumcounter}
+\setcounter{sumcounter}{0}
+
+\newenvironment{summary}[1]
+{\stepcounter{sumcounter}\noindent\begin{mdframed}[backgroundcolor=lightgray,
+    topline=false,bottomline=false,rightline=false,leftline=false,
+    innertopmargin=5pt, innerrightmargin=10pt]
+    {\small\itckabelstd{\textbf{Summary \thesection.\thesumcounter.}} {#1}}
+    \\\noindent
+    }
+{\end{mdframed}}
+
+\newenvironment{boxyrecall}[1]
+{\noindent\begin{mdframed}[backgroundcolor=lightgray,
+    topline=false,bottomline=false,rightline=false,leftline=false,
+    innertopmargin=5pt, innerrightmargin=10pt]
+    {\small\itckabelstd{\textbf{Recall.}} {#1}}
+    \\\noindent
+    }
+{\end{mdframed}}
+
+\newenvironment{remark}[1]
+{\noindent\begin{mdframed}[backgroundcolor=lightgray,
+    topline=false,bottomline=false,rightline=false,leftline=false,
+    innertopmargin=5pt, innerrightmargin=10pt]
+    {\small\itckabelstd{\textbf{Remark.}} {#1}}
+    \\\noindent
+    }
+{\end{mdframed}}
+
+\newenvironment{formula}[1]
+{\stepcounter{sumcounter}\noindent\begin{mdframed}[backgroundcolor=lightgray,
+    topline=false,bottomline=false,rightline=false,leftline=false,
+    innertopmargin=5pt, innerrightmargin=10pt]
+    {\bf\small\itckabelstd{#1}}
+    \newline\noindent
+    }
+{\end{mdframed}}
+
+%% =========================================================
 %% tabularx
 
 %% new column types for tables
@@ -87,10 +133,11 @@
 %% =========================================================
 %% titlesec
 
-\newcommand{\resetcounters}{\setcounter{stcounter}{0}\setcounter{corcounter}{0}\setcounter{defncounter}{0}\setcounter{excounter}{0}\setcounter{algocounter}{0}\setcounter{equation}{0}}
+\newcommand{\resetcounters}{\setcounter{stcounter}{0}\setcounter{corcounter}{0}\setcounter{defncounter}{0}\setcounter{excounter}{0}\setcounter{algocounter}{0}\setcounter{equation}{0}\setcounter{sumcounter}{0}}
 
 \titleformat{\section}{\clearpage\itckabelstd\Large\centering\bfseries}{\MakeUppercase{\romannumeral\thesection}. }{0pt}{\resetcounters}
 \titleformat{\subsection}{\itckabelstd\centering}{\thesubsection. }{0pt}{}
+\titleformat{\subsubsection}{\itckabelstd}{}{0pt}{}
 
 \renewcommand*{\thesubsection}{\arabic{subsection}}
 
@@ -129,9 +176,17 @@
 }{\rruleline}
 
 \newenvironment{boxyproof}[1]{%
+\setcounter{claimcounter}{0}
+\setcounter{casecounter}{0}
+\setcounter{stepcounter}{0}
+\global\qedplacedfalse
 \vspace{\preskip}
 \rightruleline{\pffont#1}
-}{\placeqed}
+}{
+\ifqedplaced%
+\else\placeqed%
+\fi
+}
 
 %% footnote settings
 \renewcommand{\thempfootnote}{\arabic{mpfootnote}}
@@ -204,6 +259,8 @@
 \newenvironment{axiom}        [1]{\begin{st}{Axiom \axnumbering}      {#1}}{\end{st}\rruleline}
 \newenvironment{postulate}    [1]{\begin{st}{Postulate \axnumbering}  {#1}}{\end{st}\rruleline}
 \newenvironment{assumption}   [1]{\begin{st}{Assumption \axnumbering} {#1}}{\end{st}\rruleline}
+\newenvironment{conjecture}   [1]{\begin{st}{Conjecture \axnumbering} {#1}}{\end{st}\rruleline}
+\newenvironment{prin}         [1]{\begin{st}{Principle \axnumbering}  {#1}}{\end{st}\rruleline}
 
 \newenvironment{lemma_inside} [1]{\begin{st}{Lemma \cornumbering}     {#1}}{\end{st}}
 \newenvironment{cor}          [1]{\begin{st}{Corollary \cornumbering} {#1}}{\end{st}}
@@ -211,6 +268,7 @@
 \newenvironment{example}      [1]{\begin{st}{Example \exnumbering}    {#1}}{\end{st}}
 \newenvironment{exercise}     [1]{\begin{st}{Exercise \exnumbering}   {#1}}{\end{st}}
 \newenvironment{question}   [1][]{\begin{st}{Question \exnumbering}   {#1}}{\end{st}}
+\newenvironment{problem}    [1][]{\begin{st}{Problem  \exnumbering}   {#1}}{\end{st}}
 
 %% algorithm
 \newcounter{indentdepth}
@@ -262,7 +320,7 @@
 \newcommand{\qedfont}   {\itckabelstd\small\bfseries}
 \newcommand{\subqedfont}{\itckabelstd\small}
 \newcommand{\qedsym}    {QED}
-\newcommand{\subqedsym} {!!!}
+\newcommand{\subqedsym} {\triangle}
 
 \newcommand{\placeqed}[1][\qedsym]      {\global\qedplacedtrue\leftruleline{\qedfont#1}\vspace{-\preskip}}
 \newcommand{\placesubqed}[1][\subqedsym]{\global\qedplacedtrue\hspace*{\fill}{\subqedfont#1}\vspace{-\preskip}}
@@ -275,6 +333,7 @@
 \noindent{#1}%
 \setcounter{claimcounter}{0}
 \setcounter{casecounter}{0}
+\setcounter{stepcounter}{0}
 }
 {
 \ifqedplaced%
@@ -298,9 +357,17 @@
 \newcounter{casecounter}
 \setcounter{casecounter}{0}
 
-\newenvironment{case}
-{\stepcounter{casecounter}\vspace{\preskip}\noindent{\subpffont Case \thecasecounter.}}
-{\\\hspace*{\fill}\textit{(End of Case \thecasecounter)}}
+\newenvironment{case}[1][\thecasecounter]
+{\stepcounter{casecounter}\vspace{\preskip}\noindent{\subpffont Case #1. }\def\temparg{#1}}
+{\\\hspace*{\fill}\textit{(End of Case \temparg)}}
+
+%% step
+\newcounter{stepcounter}
+\setcounter{stepcounter}{0}
+
+\newenvironment{step}[1][\thestepcounter]
+{\stepcounter{stepcounter}\vspace{\preskip}\noindent{\subpffont Step #1. }\def\temparg{#1}}
+{\\\hspace*{\fill}\textit{(End of Step \temparg)}}
 
 %% footnote superscript size
 \makeatletter
@@ -322,12 +389,13 @@
 
 \DeclareOption{short}
 {%
-    \renewcommand{\exnumbering}{\setcounter{equation}{0}\stepcounter{excounter}\theexcounter. }
-    \renewcommand{\stnumbering}{\setcounter{corcounter}{0}\stepcounter{stcounter}\thestcounter. }
-    \renewcommand{\cornumbering}{\stepcounter{corcounter}\thestcounter.\thecorcounter. }
-    \renewcommand{\algonumbering}{\setcounter{indentdepth}{0}\setcounter{linenumber}{0}\stepcounter{algocounter}\thealgocounter. }
-    \renewcommand{\defnnumbering}{\stepcounter{defncounter}\thedefncounter. }
-    \renewcommand{\theequation}{\thestcounter.\arabic{equation}}
+    \renewcommand{\exnumbering}{\setcounter{equation}{0}\stepcounter{excounter}\thesubsection.\theexcounter. }
+    \renewcommand{\cornumbering}{\stepcounter{corcounter}\thesubsection.\thestcounter.\thecorcounter. }
+    \renewcommand{\theequation}{\thesubsection.\arabic{equation}}
+    \renewcommand{\defnnumbering}{\stepcounter{defncounter}\thesubsection.\thedefncounter. }
+    \renewcommand{\stnumbering}{\setcounter{corcounter}{0}\stepcounter{stcounter}\thesubsection.\thestcounter. }
+    \renewcommand{\algonumbering}{\stepcounter{algocounter}\thesubsection.\thealgocounter. }
+    \titleformat{\subsection}{\itckabelstd\centering}{\thesubsection. }{0pt}{\resetcounters}
 }
 
 \ProcessOptions\relax
